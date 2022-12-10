@@ -51,7 +51,7 @@ public class Menu {
             case "7" -> agenda.adicionarContato();
             case "8" -> agenda.adicionarContato();
             case "9" -> agenda.adicionarContato();
-            case "10" -> agenda.adicionarContato();
+            case "10" -> agenda.exibirInformacoesContato();
             case "11" -> agenda.adicionarContato();
             case "12" -> agenda.adicionarContato();
             case "13" -> agenda.adicionarContato();

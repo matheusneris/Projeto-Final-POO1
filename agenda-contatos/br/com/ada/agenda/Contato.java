@@ -96,13 +96,17 @@ public class Contato {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format(
-                "Nome: %s \n" +
-                "Sobrenome: %s \n" +
-                "Empresa: %s \n", nome, sobreNome, empresa
+        sb.append(String.format("""
+            
+            Nome: %s
+            Sobrenome: %s
+            Empresa: %s
+            """, nome, sobreNome, empresa
         ));
-        sb.append("Telefones\n\n");
+        sb.append("Telefones:\n\n");
         telefones.forEach(telefones -> sb.append(telefones.toString()).append("\n"));
+        sb.append("Endereços:\n\n");
+        enderecos.forEach(enderecos -> sb.append(enderecos.toString()).append("\n"));
         return sb.toString();
     }
 

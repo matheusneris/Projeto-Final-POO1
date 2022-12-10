@@ -110,5 +110,21 @@ public class Agenda {
         System.out.println("Lista de contatos esvaziada.");
     }
 
+    public void exibirInformacoesContato(){
+        if(contatos.isEmpty()){
+            System.out.println("Não há contatos.");
+        }else {
+            listarContatos();
+            System.out.print("Informe o número do ID do contato: ");
+            int idContato = EntradaDados.obterNumeroInteiro();
+            if(idContato > contatos.size() || idContato-1 < 0){
+                System.out.println("Não existe nenhum contato com esse ID. Tente novamente!");
+            }else {
+                System.out.println(contatos.get(idContato - 1));
+            }
+        }
+
+    }
+
 
 }

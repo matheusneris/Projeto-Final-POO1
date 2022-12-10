@@ -85,4 +85,19 @@ public class Endereco {
     public void setUf(Estado uf) {
         this.uf = uf;
     }
+
+    @Override
+    public String toString() {
+        return String.format("""
+                Tipo: %s
+                Cep: %s
+                UF: %s
+                Cidade: %s
+                Bairro: %s
+                Logradouro: %s
+                Número: %s
+                Complemento: %s
+            """, tipo, cep, uf, cidade, bairro, logradouro, numero, complemento)
+                ;
+    }
 }
