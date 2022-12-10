@@ -110,4 +110,26 @@ public class Contato {
         return sb.toString();
     }
 
+    public void listarTelefones(){
+        if(verificarListaTelefones()){
+            System.out.println("\nSem Telefones cadastrados\n");
+        }else{
+            Menu.exibirCabecalhoTelefones();
+            this.telefones.forEach(telefone -> {
+                System.out.printf("%-5s %-20s %-15s %-15s %-15s\n",
+                        this.telefones.indexOf(telefone) + 1,
+                        telefone.getTipo(),
+                        telefone.getDdi(),
+                        telefone.getDdd(),
+                        telefone.getNumero());
+            });
+        }
+    }
+
+    public boolean verificarListaTelefones(){
+        return this.telefones.isEmpty();
+    }
+
+
+
 }
