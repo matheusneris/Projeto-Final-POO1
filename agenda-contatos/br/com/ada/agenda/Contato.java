@@ -214,4 +214,13 @@ public class Contato {
             System.out.printf("Erro ao cadastrar: %s %n", exception.getMessage());
         }
     }
+
+    public Telefone getTelefonePeloCodigo(int codigo){
+        return this.telefones.get(codigo-1);
+    }
+
+    public void removerTelefone(Telefone telefone){
+        this.telefones.remove(telefone);
+        System.out.println("\nTelefone removido com sucesso\n");
+    }
 }
