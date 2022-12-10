@@ -129,6 +129,18 @@ public class Contato {
         return this.telefones.isEmpty();
     }
 
+    public void addEndereco(Endereco novoEndereco) {
+        if (verificaEnderecoExiste(novoEndereco)) {
+            throw new RuntimeException("Endereço já cadastrado!");
+        }
+        this.enderecos.add(novoEndereco);
+    }
+
+    private boolean verificaEnderecoExiste(Endereco endereco) {
+        return this.enderecos.stream()
+                .anyMatch(enderecoCadastrado -> enderecoCadastrado.equals(endereco));
+    }
+
     public void addTelefone(Telefone novoTelefone) {
         if (verificaTelefoneExiste(novoTelefone)) {
             throw new RuntimeException("Telefone já cadastrado!");
@@ -160,6 +172,44 @@ public class Contato {
 
         try {
             addTelefone(telefone);
+        } catch (RuntimeException exception) {
+            System.out.printf("Erro ao cadastrar: %s %n", exception.getMessage());
+        }
+    }
+
+    public void adicionaEndereco() {
+        List<TipoEndereco> tipoEnderecos = Arrays.stream(TipoEndereco.values())
+                .collect(Collectors.toList());
+
+        String menuTiposEnderecos = tipoEnderecos.stream()
+                .map(tipoEndereco -> String.format("%n%s - %s", tipoEndereco.ordinal() + 1, tipoEndereco.name()))
+                .reduce("", String::concat);
+
+        String tipoEndereco = EntradaDados.askSimpleInput(String.format("Tipo do Endereço%s", menuTiposEnderecos));
+        TipoEndereco enumTipoEndereco = tipoEnderecos.get(Integer.parseInt(tipoEndereco) - 1);
+
+
+        String logradouro = EntradaDados.askSimpleInput("Logradouro do Endereço");
+        String bairro = EntradaDados.askSimpleInput("Bairro do Endereço");
+        String cep = EntradaDados.askSimpleInput("CEP do Endereço");
+        String numero = EntradaDados.askSimpleInput("Número do Endereço");
+        String complemento = EntradaDados.askSimpleInput("Complemento do Endereço");
+        String cidade = EntradaDados.askSimpleInput("Cidade do Endereço");
+
+        List<Estado> estados = Arrays.stream(Estado.values())
+                .collect(Collectors.toList());
+
+        String menuEstados = estados.stream()
+                .map(estado -> String.format("%n%s - %s", estado.ordinal() + 1, estado.name()))
+                .reduce("", String::concat);
+
+        String estado = EntradaDados.askSimpleInput(String.format("Estado%s", menuEstados));
+        Estado enumTipoEstado = estados.get(Integer.parseInt(estado) - 1);
+
+        Endereco endereco = new Endereco(enumTipoEndereco, logradouro, bairro, cep, numero, complemento, cidade, enumTipoEstado);
+
+        try {
+            addEndereco(endereco);
         } catch (RuntimeException exception) {
             System.out.printf("Erro ao cadastrar: %s %n", exception.getMessage());
         }
