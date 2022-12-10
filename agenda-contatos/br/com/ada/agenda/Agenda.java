@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Agenda {
-    private final List<Contato> contatos;
+    private List<Contato> contatos;
 
     public Agenda() {
         this.contatos = new ArrayList<>();
@@ -197,5 +197,9 @@ public class Agenda {
             }
         } else
             System.out.println("\nNão há contatos\n");
+    }
+
+    public void setContatos(List<Contato> contatos) {
+        this.contatos = contatos;
     }
 }
