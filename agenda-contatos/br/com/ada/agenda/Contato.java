@@ -1,8 +1,7 @@
 package br.com.ada.agenda;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Contato {
 
@@ -24,7 +23,7 @@ public class Contato {
         this.enderecos = new ArrayList<>();
     }
 
-    public Contato (String nome, String sobreNome, String empresa, List<Telefone> telefones, List<Endereco> enderecos) {
+    public Contato(String nome, String sobreNome, String empresa, List<Telefone> telefones, List<Endereco> enderecos) {
         this.nome = nome;
         this.sobreNome = sobreNome;
         this.empresa = empresa;
@@ -65,7 +64,7 @@ public class Contato {
     }
 
     public List<Telefone> getTelefones() {
-        return telefones;
+        return Collections.unmodifiableList(telefones);
     }
 
     public void setTelefones(List<Telefone> telefones) {
@@ -73,7 +72,7 @@ public class Contato {
     }
 
     public List<Endereco> getEnderecos() {
-        return enderecos;
+        return Collections.unmodifiableList(enderecos);
     }
 
     public void setEnderecos(List<Endereco> enderecos) {
@@ -97,11 +96,11 @@ public class Contato {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("""
-            
-            Nome: %s
-            Sobrenome: %s
-            Empresa: %s
-            """, nome, sobreNome, empresa
+                            
+                Nome: %s
+                Sobrenome: %s
+                Empresa: %s
+                """, nome, sobreNome, empresa
         ));
         sb.append("Telefones:\n\n");
         telefones.forEach(telefones -> sb.append(telefones.toString()).append("\n"));
@@ -110,10 +109,10 @@ public class Contato {
         return sb.toString();
     }
 
-    public void listarTelefones(){
-        if(verificarListaTelefones()){
+    public void listarTelefones() {
+        if (verificarListaTelefones()) {
             System.out.println("\nSem Telefones cadastrados\n");
-        }else{
+        } else {
             Menu.exibirCabecalhoTelefones();
             this.telefones.forEach(telefone -> {
                 System.out.printf("%-5s %-20s %-15s %-15s %-15s\n",
@@ -126,10 +125,43 @@ public class Contato {
         }
     }
 
-    public boolean verificarListaTelefones(){
+    public boolean verificarListaTelefones() {
         return this.telefones.isEmpty();
     }
 
+    public void addTelefone(Telefone novoTelefone) {
+        if (verificaTelefoneExiste(novoTelefone)) {
+            throw new RuntimeException("Telefone já cadastrado!");
+        }
+        this.telefones.add(novoTelefone);
+    }
 
+    private boolean verificaTelefoneExiste(Telefone telefone) {
+        return this.telefones.stream()
+                .anyMatch(telefoneCadastrado -> telefoneCadastrado.equals(telefone));
+    }
 
+    public void adicionaTelefone() {
+        List<TipoTelefone> tipoTelefones = Arrays.stream(TipoTelefone.values())
+                .collect(Collectors.toList());
+
+        String menuTipos = tipoTelefones.stream()
+                .map(tipoTelefone -> String.format("%n%s - %s", tipoTelefone.ordinal() + 1, tipoTelefone.name()))
+                .reduce("", String::concat);
+
+        String tipoTelefone = EntradaDados.askSimpleInput(String.format("Tipo do Telefone%s", menuTipos));
+        TipoTelefone tipo = tipoTelefones.get(Integer.parseInt(tipoTelefone) - 1);
+
+        String ddi = EntradaDados.askSimpleInput("DDI do Telefone");
+        String ddd = EntradaDados.askSimpleInput("DDD do Telefone");
+        String numero = EntradaDados.askSimpleInput("Número do Telefone");
+
+        Telefone telefone = new Telefone(tipo, ddi, ddd, numero);
+
+        try {
+            addTelefone(telefone);
+        } catch (RuntimeException exception) {
+            System.out.printf("Erro ao cadastrar: %s %n", exception.getMessage());
+        }
+    }
 }
