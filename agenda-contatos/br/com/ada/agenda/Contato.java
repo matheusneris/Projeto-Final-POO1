@@ -112,7 +112,7 @@ public class Contato {
     }
 
     public void listarTelefones() {
-        if (verificarListaTelefones()) {
+        if (listaTelefonesVazia()) {
             System.out.println("\nSem Telefones cadastrados\n");
         } else {
             Menu.exibirCabecalhoTelefones();
@@ -127,7 +127,7 @@ public class Contato {
         }
     }
 
-    public boolean verificarListaTelefones() {
+    public boolean listaTelefonesVazia() {
         return this.telefones.isEmpty();
     }
 
