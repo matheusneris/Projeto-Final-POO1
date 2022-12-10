@@ -2,6 +2,7 @@ package br.com.ada.agenda;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Agenda {
     private List<Contato> contatos;
@@ -138,5 +139,12 @@ public class Agenda {
         final var contactId = EntradaDados.obterNumeroInteiro();
         final var selectedContact = getContatoPeloCodigo(contactId);
         selectedContact.adicionaTelefone();
+    }
+
+    public Contato obterContato(){
+
+        int idContato = EntradaDados.obterId(this.contatos);
+        return getContatoPeloCodigo(idContato);
+
     }
 }

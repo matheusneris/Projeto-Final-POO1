@@ -1,5 +1,7 @@
 package br.com.ada.agenda;
 
+import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class EntradaDados {
@@ -30,6 +32,27 @@ public class EntradaDados {
                 System.out.println("Informe apenas números inteiros");
             }
         }
+    }
+
+    public static int obterId(List<?> lista){
+
+        while (true){
+            int id = -1;
+            try{
+                System.out.print("\nDigite o id: ");
+                id = entrada.nextInt();
+            } catch (InputMismatchException exception){
+                System.out.println("\nDigite apenas números\n");
+            } finally {
+                entrada.nextLine();
+            }
+            if (id < 1 || id > lista.size()){
+                System.out.println("Id inválido");
+            } else {
+                return id;
+            }
+        }
+
     }
 
     public static String obterNome() {
