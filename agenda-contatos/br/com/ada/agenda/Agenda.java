@@ -1,6 +1,7 @@
 package br.com.ada.agenda;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Agenda {
@@ -201,5 +202,9 @@ public class Agenda {
 
     public void setContatos(List<Contato> contatos) {
         this.contatos = contatos;
+    }
+
+    public List<Contato> getContatos() {
+        return Collections.unmodifiableList(contatos);
     }
 }

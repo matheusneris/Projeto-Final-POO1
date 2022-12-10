@@ -1,7 +1,7 @@
-C;Felipe;Z;FL;felipe@
+C;Felipe;Z;FL;FL
 T;COMERCIAL;+55;11;999999999999
 T;RESIDENCIAL;+55;18;88888888888
 E;COMERCIAL;Rua abc;Jardimdef;00000005;10;Sem;São Paulo;SP
 ;
-C;Bruno;B;BZ;bruno@b
+C;Bruno;B;BZ;BZ
 ;
