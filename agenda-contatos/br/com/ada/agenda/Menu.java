@@ -49,24 +49,10 @@ public class Menu {
             case "5" -> agenda.removerTodosContatos();
             case "6" -> agenda.adicionarTelefone();
             case "7" -> agenda.adicionarEndereco();
-            case "8" -> agenda.adicionarContato();
+            case "8" -> removerTelefone();
             case "9" -> agenda.adicionarContato();
             case "10" -> agenda.exibirInformacoesContato();
-            case "11" -> {
-                if (!agenda.verificarListaContatos()) {
-                    agenda.listarContatos();
-                    System.out.print("\nDigite o id do contato: \n");
-                    int idContato = EntradaDados.obterNumeroInteiro();
-
-                    final var contatoFound = agenda.getContatoPeloCodigo(idContato);
-                    if (contatoFound == null) {
-                        System.out.println("Não existe contato com esse ID");
-                    } else {
-                        contatoFound.listarTelefones();
-                    }
-                } else
-                    System.out.println("\nNão há contatos cadastrados\n");
-            }
+            case "11" -> listarTelefone();
             case "12" -> agenda.adicionarContato();
             case "13" -> agenda.adicionarContato();
             case "14" -> agenda.adicionarContato();
@@ -80,5 +66,31 @@ public class Menu {
 
     public static void exibirCabecalhoTelefones() {
         System.out.printf("%-5s %-20s %-15s %-15s %-15s\n", "ID", "Tipo Telefone", "DDI", "DDD", "Numero");
+    }
+
+    public static void removerTelefone() {
+        if (!agenda.verificarListaContatos()){
+            agenda.listarContatos();
+            Contato contato = agenda.obterContato();
+            if(!contato.verificarListaTelefones()){
+                contato.listarTelefones();
+                int idTelefone = EntradaDados.obterId(contato.getTelefones());
+                Telefone telefone = contato.getTelefonePeloCodigo(idTelefone);
+                contato.removerTelefone(telefone);
+            }else{
+                System.out.println("\nSem telefones cadastrados\n");
+            }
+        } else
+            System.out.println("\nNão há contatos\n");
+
+    }
+
+    public static void listarTelefone() {
+        if (!agenda.verificarListaContatos()){
+            agenda.listarContatos();
+            agenda.obterContato().listarTelefones();
+        } else
+            System.out.println("\nNão há contatos\n");
+
     }
 }

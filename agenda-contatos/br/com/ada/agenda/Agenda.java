@@ -164,4 +164,11 @@ public class Agenda {
         }
 
     }
+
+    public Contato obterContato(){
+
+        int idContato = EntradaDados.obterId(this.contatos);
+        return getContatoPeloCodigo(idContato);
+
+    }
 }
