@@ -7,6 +7,9 @@ public class Menu {
 
     public static void iniciarMenu() {
 
+        Arquivo.obterDadosArquivo();
+        agenda.setContatos(Arquivo.atualizarAgenda());
+
         String continuar = "";
 
         do {
@@ -33,6 +36,8 @@ public class Menu {
             System.out.printf(">");
 
             Menu.direcionarOpcao(EntradaDados.obterOpcao());
+
+            Arquivo.salvarArquivo(agenda);
 
             continuar = EntradaDados.continuarNoPrograma();
 

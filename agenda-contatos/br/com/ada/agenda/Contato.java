@@ -13,6 +13,8 @@ public class Contato {
 
     private List<Endereco> enderecos;
 
+    public Contato() {
+    }
 
     public Contato(String nome, String sobreNome, String empresa, String email) {
         this.nome = nome;
