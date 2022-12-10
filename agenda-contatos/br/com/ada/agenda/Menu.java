@@ -48,7 +48,7 @@ public class Menu {
             case "4" -> agenda.removerContato();
             case "5" -> agenda.removerTodosContatos();
             case "6" -> agenda.adicionarTelefone();
-            case "7" -> agenda.adicionarContato();
+            case "7" -> agenda.adicionarEndereco();
             case "8" -> agenda.adicionarContato();
             case "9" -> agenda.adicionarContato();
             case "10" -> agenda.exibirInformacoesContato();

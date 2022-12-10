@@ -117,8 +117,6 @@ public class Agenda {
             int idContato = EntradaDados.obterNumeroInteiro();
             System.out.println(getContatoPeloCodigo(idContato));
         }
-
-
     }
 
     public boolean verificarListaContatos(){
@@ -129,7 +127,13 @@ public class Agenda {
         if (codigoContato > contatos.size() || codigoContato - 1 < 0) {
             System.out.println("Não existe nenhum contato com esse ID. Tente novamente!");
         }
-        return this.contatos.get(codigoContato - 1);
+        try {
+            Contato contato = this.contatos.get(codigoContato - 1);
+            return contato;
+        } catch (IndexOutOfBoundsException ex) {
+            System.out.println("ID não existe");
+            return null;
+        }
     }
 
     public void adicionarTelefone() {
@@ -138,5 +142,13 @@ public class Agenda {
         final var contactId = EntradaDados.obterNumeroInteiro();
         final var selectedContact = getContatoPeloCodigo(contactId);
         selectedContact.adicionaTelefone();
+    }
+
+    public void adicionarEndereco() {
+        listarContatos();
+        System.out.print("Informe o número do ID do contato: ");
+        final var contactId = EntradaDados.obterNumeroInteiro();
+        final var selectedContact = getContatoPeloCodigo(contactId);
+        selectedContact.adicionaEndereco();
     }
 }
