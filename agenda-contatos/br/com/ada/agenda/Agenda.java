@@ -2,8 +2,6 @@ package br.com.ada.agenda;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Agenda {
     private List<Contato> contatos;
@@ -117,12 +115,9 @@ public class Agenda {
             listarContatos();
             System.out.print("Informe o número do ID do contato: ");
             int idContato = EntradaDados.obterNumeroInteiro();
-            if(idContato > contatos.size() || idContato-1 < 0){
-                System.out.println("Não existe nenhum contato com esse ID. Tente novamente!");
-            }else {
-                System.out.println(contatos.get(idContato - 1));
-            }
+            System.out.println(getContatoPeloCodigo(idContato));
         }
+
 
     }
 
@@ -130,8 +125,18 @@ public class Agenda {
         return this.contatos.isEmpty();
     }
 
-
     public Contato getContatoPeloCodigo(int codigoContato) {
+        if (codigoContato > contatos.size() || codigoContato - 1 < 0) {
+            System.out.println("Não existe nenhum contato com esse ID. Tente novamente!");
+        }
         return this.contatos.get(codigoContato - 1);
+    }
+
+    public void adicionarTelefone() {
+        listarContatos();
+        System.out.print("Informe o número do ID do contato: ");
+        final var contactId = EntradaDados.obterNumeroInteiro();
+        final var selectedContact = getContatoPeloCodigo(contactId);
+        selectedContact.adicionaTelefone();
     }
 }

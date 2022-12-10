@@ -29,8 +29,8 @@ public class Menu {
                 12 - Listar todos os endereços de um Contato
                 13 - Exibir todas as informações de um telefone de um Contato
                 14 - Exibir todas as informações de um endereço de um Contato
-                
                 """);
+            System.out.printf(">");
 
             Menu.direcionarOpcao(EntradaDados.obterOpcao());
 
@@ -47,7 +47,7 @@ public class Menu {
             case "3" -> agenda.buscarContato();
             case "4" -> agenda.removerContato();
             case "5" -> agenda.removerTodosContatos();
-            case "6" -> agenda.adicionarContato();
+            case "6" -> agenda.adicionarTelefone();
             case "7" -> agenda.adicionarContato();
             case "8" -> agenda.adicionarContato();
             case "9" -> agenda.adicionarContato();
