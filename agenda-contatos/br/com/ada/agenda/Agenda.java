@@ -1,19 +1,18 @@
 package br.com.ada.agenda;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Agenda {
     private List<Contato> contatos;
 
-    public Agenda(){
+    public Agenda() {
         this.contatos = new ArrayList<>();
     }
 
     public List<Contato> getContatos() {
-        return contatos;
+        return Collections.unmodifiableList(contatos);
     }
 
     public void setContatos(List<Contato> contatos) {
@@ -32,15 +31,14 @@ public class Agenda {
 
         Contato novoContato = new Contato(nome, sobreNome, empresa, email);
 
-        if(!verificarContato(novoContato)){
+        if (!verificarContato(novoContato)) {
             this.contatos.add(novoContato);
             System.out.println("\nContato adicionado com sucesso!\n");
-        }
-        else
+        } else
             System.out.println("\nO contato já existe\n");
     }
 
-    public boolean verificarContato(Contato novoContato){
+    public boolean verificarContato(Contato novoContato) {
         return this.contatos
                 .stream().anyMatch(contato -> contato.equals(novoContato));
     }
@@ -49,7 +47,7 @@ public class Agenda {
 
         Menu.exibirCabecalhoContatos();
 
-        if(!this.contatos.isEmpty()){
+        if (!this.contatos.isEmpty()) {
 
             this.contatos.forEach(contato -> {
                 System.out.printf("%-5s %-15s %-15s %-25s\n",
@@ -64,7 +62,7 @@ public class Agenda {
         }
     }
 
-    public void buscarContato(){
+    public void buscarContato() {
         String contatoAPesquisar = EntradaDados.obterNomePesquisa();
 
         List<Contato> contatosFiltrados = this.contatos.stream()
@@ -74,9 +72,9 @@ public class Agenda {
                 })
                 .toList();
 
-        if (contatosFiltrados.isEmpty()){
+        if (contatosFiltrados.isEmpty()) {
             System.out.println("\nNenhum contato encontrado\n");
-        } else{
+        } else {
             Menu.exibirCabecalhoContatos();
             contatosFiltrados.forEach(contato -> {
                 System.out.printf("%-5s %-15s %-15s %-25s\n",
@@ -88,16 +86,16 @@ public class Agenda {
         }
     }
 
-    public void removerContato(){
-        if(contatos.isEmpty()){
+    public void removerContato() {
+        if (contatos.isEmpty()) {
             System.out.println("Não há contatos.");
-        }else {
+        } else {
             listarContatos();
             System.out.print("Informe o número do ID do contato: ");
             int idContato = EntradaDados.obterNumeroInteiro();
-            if(idContato > contatos.size() || idContato-1 < 0){
+            if (idContato > contatos.size() || idContato - 1 < 0) {
                 System.out.println("Não existe nenhum contato com esse ID. Tente novamente!");
-            }else {
+            } else {
                 contatos.remove(idContato - 1);
                 System.out.println("Contato removido!");
             }
@@ -105,26 +103,34 @@ public class Agenda {
 
     }
 
-    public void removerTodosContatos(){
+    public void removerTodosContatos() {
         contatos.clear();
         System.out.println("Lista de contatos esvaziada.");
     }
 
-    public void exibirInformacoesContato(){
-        if(contatos.isEmpty()){
+    public Contato getContactByID(int idContato) {
+        if (idContato > contatos.size() || idContato - 1 < 0) {
+            System.out.println("Não existe nenhum contato com esse ID. Tente novamente!");
+        }
+        return (contatos.get(idContato - 1));
+    }
+
+    public void exibirInformacoesContato() {
+        if (contatos.isEmpty()) {
             System.out.println("Não há contatos.");
-        }else {
+        } else {
             listarContatos();
             System.out.print("Informe o número do ID do contato: ");
             int idContato = EntradaDados.obterNumeroInteiro();
-            if(idContato > contatos.size() || idContato-1 < 0){
-                System.out.println("Não existe nenhum contato com esse ID. Tente novamente!");
-            }else {
-                System.out.println(contatos.get(idContato - 1));
-            }
+            System.out.println(getContactByID(idContato));
         }
-
     }
 
-
+    public void adicionarTelefone() {
+        listarContatos();
+        System.out.print("Informe o número do ID do contato: ");
+        final var contactId = EntradaDados.obterNumeroInteiro();
+        final var selectedContact = getContactByID(contactId);
+        selectedContact.addTelefone();
+    }
 }
