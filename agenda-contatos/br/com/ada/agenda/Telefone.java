@@ -17,11 +17,12 @@ public class Telefone {
 
     @Override
     public String toString() {
-        return String.format(
-                "Tipo: %s \n" +
-                "DDI %s \n" +
-                "DDD %s \n" +
-                "Numero %s \n", tipo, ddi, ddd, numero)
+        return String.format("""               
+                    Tipo: %s
+                    DDI %s
+                    DDD %s
+                    Numero %s
+                """, tipo, ddi, ddd, numero)
                 ;
     }
 }
