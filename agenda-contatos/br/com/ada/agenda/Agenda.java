@@ -86,7 +86,6 @@ public class Agenda {
                 System.out.println("Contato removido!");
             }
         }
-
     }
 
     public void removerTodosContatos() {
@@ -136,7 +135,6 @@ public class Agenda {
             }
         } else
             System.out.println("\nNão há contatos\n");
-
     }
 
     public Contato getContatoPeloCodigo(int codigoContato) {
@@ -147,8 +145,6 @@ public class Agenda {
             return null;
         }
     }
-
-
 
     public void adicionarTelefone() {
         listarContatos();
@@ -174,7 +170,6 @@ public class Agenda {
         } else {
             contatoFound.adicionaEndereco();
         }
-
     }
 
     public Contato obterContato() {
@@ -198,6 +193,23 @@ public class Agenda {
             }
         } else
             System.out.println("\nNão há contatos\n");
+    }
+
+    public void removerEndereco() {
+        if (Menu.agenda.listaPossuiContatos()) {
+            Menu.agenda.listarContatos();
+            Contato contato = Menu.agenda.obterContato();
+            if (!contato.listaEnderecosVazia()) {
+                contato.listarEnderecos();
+                int idEndereco = EntradaDados.obterId(contato.getEnderecos());
+                Endereco endereco = contato.getEnderecoPeloCodigo(idEndereco);
+                contato.removerEndereco(endereco);
+            } else {
+                System.out.println("\nSem endereços cadastrados\n");
+            }
+        } else
+            System.out.println("\nNão há contatos\n");
+
     }
 
     public void setContatos(List<Contato> contatos) {
