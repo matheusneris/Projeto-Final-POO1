@@ -225,4 +225,39 @@ public class Contato {
         this.telefones.remove(telefone);
         System.out.println("\nTelefone removido com sucesso\n");
     }
+
+    public boolean listaEnderecosVazia() {
+        return this.enderecos.isEmpty();
+    }
+
+    public void listarEnderecos() {
+        if (listaEnderecosVazia()) {
+            System.out.println("\nSem Endereços cadastrados\n");
+        } else {
+            Menu.exibirCabecalhoEnderecos();
+            this.enderecos.forEach(endereco -> {
+                System.out.printf("%-5s %-20s %-20s %-20s %-12s %-10s %-15s %-20s %-5s\n",
+                        this.enderecos.indexOf(endereco) + 1,
+                        endereco.getTipo(),
+                        endereco.getLogradouro(),
+                        endereco.getBairro(),
+                        endereco.getCep(),
+                        endereco.getNumero(),
+                        endereco.getComplemento(),
+                        endereco.getCidade(),
+                        endereco.getUf()
+                       );
+            });
+        }
+    }
+
+    public Endereco getEnderecoPeloCodigo(int idEndereco) {
+        return this.enderecos.get(idEndereco-1);
+    }
+
+    public void removerEndereco(Endereco endereco) {
+        this.enderecos.remove(endereco);
+        System.out.println("\nEndereço removido com sucesso\n");
+
+    }
 }

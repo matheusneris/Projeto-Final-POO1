@@ -54,7 +54,7 @@ public class Menu {
             case "6" -> agenda.adicionarTelefone();
             case "7" -> agenda.adicionarEndereco();
             case "8" -> agenda.removerTelefone();
-            case "9" -> agenda.adicionarContato();
+            case "9" -> agenda.removerEndereco();
             case "10" -> agenda.exibirInformacoesContato();
             case "11" -> agenda.listarTelefone();
             case "12" -> agenda.adicionarContato();
@@ -70,6 +70,11 @@ public class Menu {
 
     public static void exibirCabecalhoTelefones() {
         System.out.printf("%-5s %-20s %-15s %-15s %-15s\n", "ID", "Tipo Telefone", "DDI", "DDD", "Numero");
+    }
+
+    public static void exibirCabecalhoEnderecos() {
+        System.out.printf("%-5s %-20s %-20s %-20s %-12s %-10s %-15s %-20s %-5s\n",
+                "ID", "Tipo",  "Logradouro",  "Bairro ",  "Cep",  "Número",  "Complemento",  "Cidade ",  "UF");
     }
 
 }

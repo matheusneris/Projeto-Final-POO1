@@ -5,3 +5,7 @@ E;COMERCIAL;Rua abc;Jardimdef;00000005;10;Sem;São Paulo;SP
 ;
 C;Bruno;B;BZ;BZ
 ;
+C;esd;s;dsd;dss
+;
+C;Adriano;Dias;ADA;asd@email.com
+;
