@@ -25,4 +25,20 @@ public class Telefone {
                 """, tipo, ddi, ddd, numero)
                 ;
     }
+
+    public TipoTelefone getTipo() {
+        return tipo;
+    }
+
+    public String getDdi() {
+        return ddi;
+    }
+
+    public String getDdd() {
+        return ddd;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
 }

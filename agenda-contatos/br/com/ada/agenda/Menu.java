@@ -52,7 +52,16 @@ public class Menu {
             case "8" -> agenda.adicionarContato();
             case "9" -> agenda.adicionarContato();
             case "10" -> agenda.exibirInformacoesContato();
-            case "11" -> agenda.adicionarContato();
+            case "11" -> {
+                if(!agenda.verificarListaContatos()){
+                    agenda.listarContatos();
+                    System.out.print("\nDigite o id do contato: \n");
+                    int idContato = EntradaDados.obterNumeroInteiro();
+                    Contato contato = agenda.getContatoPeloCodigo(idContato);
+                    contato.listarTelefones();
+                } else
+                    System.out.println("\nNão há contatos cadastrados\n");
+            }
             case "12" -> agenda.adicionarContato();
             case "13" -> agenda.adicionarContato();
             case "14" -> agenda.adicionarContato();
@@ -62,5 +71,9 @@ public class Menu {
 
     public static void exibirCabecalhoContatos(){
         System.out.printf("%-5s %-15s %-15s %-25s\n", "ID", "Nome", "Sobrenome", "E-mail");
+    }
+
+    public static void exibirCabecalhoTelefones(){
+        System.out.printf("%-5s %-20s %-15s %-15s %-15s\n", "ID", "Tipo Telefone", "DDI", "DDD", "Numero");
     }
 }

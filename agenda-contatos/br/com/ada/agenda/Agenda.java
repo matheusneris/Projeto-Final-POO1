@@ -126,5 +126,12 @@ public class Agenda {
 
     }
 
+    public boolean verificarListaContatos(){
+        return this.contatos.isEmpty();
+    }
 
+
+    public Contato getContatoPeloCodigo(int codigoContato) {
+        return this.contatos.get(codigoContato - 1);
+    }
 }
