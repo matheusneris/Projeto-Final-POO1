@@ -1,5 +1,7 @@
 package br.com.ada.agenda;
 
+import java.util.Objects;
+
 public class Endereco {
 
     private TipoEndereco tipo;
@@ -99,5 +101,18 @@ public class Endereco {
                 Complemento: %s
             """, tipo, cep, uf, cidade, bairro, logradouro, numero, complemento)
                 ;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Endereco endereco = (Endereco) o;
+        return tipo == endereco.tipo && logradouro.equals(endereco.logradouro) && bairro.equals(endereco.bairro) && cep.equals(endereco.cep) && numero.equals(endereco.numero) && Objects.equals(complemento, endereco.complemento) && cidade.equals(endereco.cidade) && uf == endereco.uf;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(tipo, logradouro, bairro, cep, numero, complemento, cidade, uf);
     }
 }

@@ -1,8 +1,10 @@
 package br.com.ada.agenda;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 public class Agenda {
     private List<Contato> contatos;
@@ -89,8 +91,22 @@ public class Agenda {
     }
 
     public void removerTodosContatos() {
-        contatos.clear();
-        System.out.println("Lista de contatos esvaziada.");
+        System.out.println("Tem certeza que deseja excluir todos os seus contatos? 1 - SIM   2 - NÃO");
+        int entradaUsuario;
+        while (true){
+            entradaUsuario = EntradaDados.obterNumeroInteiro();
+            if (entradaUsuario != 1 && entradaUsuario != 2){
+                System.out.println("Informe apenas 1 ou 2.");
+            }else {
+                if(entradaUsuario == 1){
+                    contatos.clear();
+                    System.out.println("Lista de contatos esvaziada.");
+                    break;
+                }else {
+                    break;
+                }
+            }
+        }
     }
 
     public void exibirInformacoesContato() {
@@ -117,6 +133,14 @@ public class Agenda {
         if (Menu.agenda.listaPossuiContatos()) {
             Menu.agenda.listarContatos();
             Menu.agenda.obterContato().listarTelefones();
+        } else
+            System.out.println("\nNão há contatos\n");
+    }
+
+    public void listarEndereco() {
+        if (Menu.agenda.listaPossuiContatos()) {
+            Menu.agenda.listarContatos();
+            Menu.agenda.obterContato().listarEnderecos();
         } else
             System.out.println("\nNão há contatos\n");
     }

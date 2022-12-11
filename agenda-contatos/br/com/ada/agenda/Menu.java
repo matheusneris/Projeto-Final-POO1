@@ -62,7 +62,7 @@ public class Menu {
             case "9" -> agenda.removerEndereco();
             case "10" -> agenda.exibirInformacoesContato();
             case "11" -> agenda.listarTelefone();
-            case "12" -> agenda.adicionarContato();
+            case "12" -> agenda.listarEndereco();
             case "13" -> agenda.exibirInformacoesTelefone();
             case "14" -> agenda.adicionarContato();
             default -> System.out.println("Opção inválida!\n");
@@ -74,12 +74,12 @@ public class Menu {
     }
 
     public static void exibirCabecalhoTelefones() {
-        System.out.printf("%-5s %-20s %-15s %-15s %-15s\n", "ID", "Tipo Telefone", "DDI", "DDD", "Numero");
+        System.out.printf("%-5s %-15s %-15s\n", "ID", "DDD", "Numero");
     }
 
     public static void exibirCabecalhoEnderecos() {
-        System.out.printf("%-5s %-20s %-20s %-20s %-12s %-10s %-15s %-20s %-5s\n",
-                "ID", "Tipo",  "Logradouro",  "Bairro ",  "Cep",  "Número",  "Complemento",  "Cidade ",  "UF");
+        System.out.printf("%-5s %-20s %-20s %-10s %-20s %-5s\n",
+                "ID",  "Logradouro",  "Bairro ",  "Número",  "Cidade ",  "UF");
     }
 
 }

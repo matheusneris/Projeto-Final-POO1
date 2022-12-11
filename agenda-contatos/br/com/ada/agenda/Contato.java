@@ -117,10 +117,8 @@ public class Contato {
         } else {
             Menu.exibirCabecalhoTelefones();
             this.telefones.forEach(telefone -> {
-                System.out.printf("%-5s %-20s %-15s %-15s %-15s\n",
+                System.out.printf("%-5s %-15s %-15s\n",
                         this.telefones.indexOf(telefone) + 1,
-                        telefone.getTipo(),
-                        telefone.getDdi(),
                         telefone.getDdd(),
                         telefone.getNumero());
             });
@@ -236,14 +234,11 @@ public class Contato {
         } else {
             Menu.exibirCabecalhoEnderecos();
             this.enderecos.forEach(endereco -> {
-                System.out.printf("%-5s %-20s %-20s %-20s %-12s %-10s %-15s %-20s %-5s\n",
+                System.out.printf("%-5s %-20s %-20s %-10s %-20s %-5s\n",
                         this.enderecos.indexOf(endereco) + 1,
-                        endereco.getTipo(),
                         endereco.getLogradouro(),
                         endereco.getBairro(),
-                        endereco.getCep(),
                         endereco.getNumero(),
-                        endereco.getComplemento(),
                         endereco.getCidade(),
                         endereco.getUf()
                        );
