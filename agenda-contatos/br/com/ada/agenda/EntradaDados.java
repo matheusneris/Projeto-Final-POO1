@@ -84,4 +84,10 @@ public class EntradaDados {
         System.out.printf("%s%n> ", message);
         return entrada.nextLine().trim();
     }
+
+    public static void encerrarPrograma(){
+        entrada.close();
+        System.out.println("\nFim do programa!\n");
+        System.exit(0);
+    }
 }
