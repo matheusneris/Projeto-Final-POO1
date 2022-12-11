@@ -31,6 +31,8 @@ public class Menu {
                     12 - Listar todos os endereços de um Contato
                     13 - Exibir todas as informações de um telefone de um Contato
                     14 - Exibir todas as informações de um endereço de um Contato
+                    0 - Encerrar programa
+                    
                     """);
             System.out.printf(">");
 
@@ -41,11 +43,14 @@ public class Menu {
             continuar = EntradaDados.continuarNoPrograma();
 
         } while (continuar.equals("1"));
+
+        EntradaDados.encerrarPrograma();
     }
 
     public static void direcionarOpcao(String opcao) {
 
         switch (opcao) {
+            case "0" -> EntradaDados.encerrarPrograma();
             case "1" -> agenda.adicionarContato();
             case "2" -> agenda.listarContatos();
             case "3" -> agenda.buscarContato();

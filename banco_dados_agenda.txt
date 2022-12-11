@@ -1,11 +1,16 @@
 C;Felipe;Z;FL;FL
-T;COMERCIAL;+55;11;999999999999
 T;RESIDENCIAL;+55;18;88888888888
-E;COMERCIAL;Rua abc;Jardimdef;00000005;10;Sem;São Paulo;SP
+E;CAIXA_POSTAL;Rua sem nome;Bairro sem nome;01010101;10;Sem complemento;Presidente Prudente;SP
 ;
 C;Bruno;B;BZ;BZ
 ;
-C;esd;s;dsd;dss
+C;Adriano;Dias;ADA;ADA
+T;CELULAR;18;18;55555555555
 ;
-C;Adriano;Dias;ADA;asd@email.com
+C;José;Silva;Enel7;Enel7
+E;CAIXA_POSTAL;Rua sem saída;Bairro sem fim;000000000;01;Final da rua;Cidade Fantasma;ES
+;
+C;Maria;de Campos;Fifa;Fifa
+T;CELULAR;+55;18;98989898
+T;RESIDENCIAL;+55;18;68587447
 ;
