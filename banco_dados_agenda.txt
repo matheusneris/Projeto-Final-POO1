@@ -10,7 +10,8 @@ T;CELULAR;18;18;55555555555
 C;José;Silva;Enel7;Enel7
 E;CAIXA_POSTAL;Rua sem saída;Bairro sem fim;000000000;01;Final da rua;Cidade Fantasma;ES
 ;
-C;Maria;de Campos;Fifa;Fifa
-T;CELULAR;+55;18;98989898
-T;RESIDENCIAL;+55;18;68587447
+C;Pamela;Souza;Qualquer;Qualquer
+T;RESIDENCIAL;+55;11;98987547
+E;RESIDENCIAL;Rua qualquer;bairro qualquer;00047447;1;Sem;X;DF
+E;COMERCIAL;Y;X;5555555;47;NAda;D;MS
 ;
