@@ -25,14 +25,6 @@ public class Contato {
         this.enderecos = new ArrayList<>();
     }
 
-    public Contato(String nome, String sobreNome, String empresa, List<Telefone> telefones, List<Endereco> enderecos) {
-        this.nome = nome;
-        this.sobreNome = sobreNome;
-        this.empresa = empresa;
-        this.telefones = telefones;
-        this.enderecos = enderecos;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -102,7 +94,8 @@ public class Contato {
                 Nome: %s
                 Sobrenome: %s
                 Empresa: %s
-                """, nome, sobreNome, empresa
+                Email: %s
+                """, nome, sobreNome, empresa, email
         ));
         sb.append("Telefones:\n\n");
         telefones.forEach(telefones -> sb.append(telefones.toString()).append("\n"));
