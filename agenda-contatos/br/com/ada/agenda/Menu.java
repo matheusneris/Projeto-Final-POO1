@@ -1,6 +1,8 @@
 package br.com.ada.agenda;
 
 
+import java.nio.file.Path;
+
 public class Menu {
     static Agenda agenda = new Agenda();
     private static boolean salvar;
@@ -69,15 +71,18 @@ public class Menu {
             case "13" -> agenda.exibirInformacoesTelefone();
             case "14" -> agenda.exibirInformacoesEndereco();
             case "15" -> {
+                Path path = Arquivo.getFileName();
                 Arquivo.atualizarNomeArquivo();
                 Arquivo.salvarArquivo(agenda);
                 System.out.println("\nDados salvo com sucesso\n");
+                Arquivo.setFileName(path);
             }
             case "16" -> {
+                Path path = Arquivo.getFileName();
                 Arquivo.atualizarNomeArquivo();
                 Arquivo.obterDadosArquivo();
                 agenda.setContatos(Arquivo.atualizarAgenda());
-                System.out.println("\nAgenda atualizada\n");
+                Arquivo.setFileName(path);
             }
             default -> System.out.println("Opção inválida!\n");
         }
