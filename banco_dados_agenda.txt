@@ -1,29 +1,10 @@
-C;Felipe;Z;FL;FL
-T;RESIDENCIAL;+55;18;88888888888
-E;CAIXA_POSTAL;Rua sem nome;Bairro sem nome;01010101;10;Sem complemento;Presidente Prudente;SP
+C;a;a;a;a
 ;
-C;Bruno;B;BZ;BZ
+C;b;b;b;b
 ;
-C;Adriano;Dias;ADA;ADA
-T;CELULAR;18;18;55555555555
+C;c;c;c;c
 ;
-C;José;Silva;Enel7;Enel7
-E;CAIXA_POSTAL;Rua sem saída;Bairro sem fim;000000000;01;Final da rua;Cidade Fantasma;ES
+C;d;d;d;d
 ;
-C;Pamela;Souza;Qualquer;Qualquer
-T;RESIDENCIAL;+55;11;98987547
-E;RESIDENCIAL;Rua qualquer;bairro qualquer;00047447;1;Sem;X;DF
-E;COMERCIAL;Y;X;5555555;47;NAda;D;MS
-;
-C;Matheus;Neris;Ultragaz;Ultragaz
-T;CELULAR;+55;61;998408789
-E;RESIDENCIAL;Rua João Born;Ponte;88130800;2112;103;Palhoça;SC
-E;COMERCIAL;Rua 10;Centro;72115025;710;;Palhoça;SC
-;
-C;Ana;Trindade;Anatech;Anatech
-T;CELULAR;55;21;998889988
-;
-C;Beatriz;Machado;Biatech;bia@email.com
-T;CELULAR;55;21;888998899
-E;COMERCIAL;Rua A;Centro;22000493;123;apto 123;Rio de Janeiro;RJ
+C;h;h;h;h
 ;
