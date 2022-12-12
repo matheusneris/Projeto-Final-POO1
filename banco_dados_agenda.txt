@@ -23,7 +23,7 @@ E;COMERCIAL;Rua 10;Centro;72115025;710;;Palhoça;SC
 C;Ana;Trindade;Anatech;Anatech
 T;CELULAR;55;21;998889988
 ;
-C;Beatriz;Machado;Biatech;bia@email.com
+C;Beatriz;Machado;Biatech;Biatech
 T;CELULAR;55;21;888998899
 E;COMERCIAL;Rua A;Centro;22000493;123;apto 123;Rio de Janeiro;RJ
 ;

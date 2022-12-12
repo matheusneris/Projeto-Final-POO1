@@ -38,14 +38,41 @@ public class Agenda {
         Menu.exibirCabecalhoContatos();
 
         if (!this.contatos.isEmpty()) {
+            final Integer pageSize = 3;
+            final var numberOfPages = (int) Math.ceil(contatos.size() / pageSize.floatValue());
+            var pageNumber = 1;
+            var loopPagination = true;
 
-            this.contatos.forEach(contato ->
-                    System.out.printf("%-5s %-15s %-15s %-25s\n",
-                            this.contatos.indexOf(contato) + 1,
-                            contato.getNome(),
-                            contato.getSobreNome(),
-                            contato.getEmail())
-            );
+            do {
+                this.contatos.stream()
+                        .skip((pageNumber - 1) * pageSize)
+                        .limit(pageSize)
+                        .forEach(contato ->
+                                System.out.printf("%-5s %-15s %-15s %-25s\n",
+                                        this.contatos.indexOf(contato) + 1,
+                                        contato.getNome(),
+                                        contato.getSobreNome(),
+                                        contato.getEmail())
+                        );
+                if (numberOfPages == 1) {
+                    loopPagination = false;
+                } else {
+                    final var selection = EntradaDados.askSimpleInput("""
+                            
+                            Entre:
+                                    <a> para página anterior
+                                    <d> para próxima página
+                                    <x> para finalizar paginação
+                            """).toLowerCase();
+                    switch (selection) {
+                        case "a" -> pageNumber = pageNumber == 1 ? pageNumber : pageNumber - 1;
+                        case "d" -> pageNumber = pageNumber == numberOfPages ? pageNumber : pageNumber + 1;
+                        case "x" -> loopPagination = false;
+                        default -> System.out.println("Seleção inválida, tente novamente");
+                    }
+                }
+            }
+            while (loopPagination);
 
         } else {
             System.out.println("\nNão há contatos\n");
@@ -93,16 +120,16 @@ public class Agenda {
     public void removerTodosContatos() {
         System.out.println("Tem certeza que deseja excluir todos os seus contatos? 1 - SIM   2 - NÃO");
         int entradaUsuario;
-        while (true){
+        while (true) {
             entradaUsuario = EntradaDados.obterNumeroInteiro();
-            if (entradaUsuario != 1 && entradaUsuario != 2){
+            if (entradaUsuario != 1 && entradaUsuario != 2) {
                 System.out.println("Informe apenas 1 ou 2.");
-            }else {
-                if(entradaUsuario == 1){
+            } else {
+                if (entradaUsuario == 1) {
                     contatos.clear();
                     System.out.println("Lista de contatos esvaziada.");
                     break;
-                }else {
+                } else {
                     break;
                 }
             }
