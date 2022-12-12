@@ -3,6 +3,8 @@ package br.com.ada.agenda;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class EntradaDados {
 
@@ -66,8 +68,23 @@ public class EntradaDados {
     }
 
     public static String obterEmail() {
-        System.out.print("\nDigite o email: ");
-        return entrada.nextLine();
+        while (true) {
+            System.out.print("\nDigite o email: ");
+            String emailDigitado = entrada.nextLine();
+            boolean valido = validarEmail(emailDigitado);
+            if(valido){
+                return emailDigitado;
+            } else {
+                System.out.println("Email informado é inválido. Digite novamente.");
+            }
+        }
+    }
+
+    public static boolean validarEmail(String email){
+        String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
 
     public static String obterEmpresa() {
