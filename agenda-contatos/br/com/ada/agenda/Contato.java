@@ -166,8 +166,18 @@ public class Contato {
                 .map(tipoTelefone -> String.format("%n%s - %s", tipoTelefone.ordinal() + 1, tipoTelefone.name()))
                 .reduce("", String::concat);
 
-        String tipoTelefone = EntradaDados.askSimpleInput(String.format("Tipo do Telefone%s", menuTipos));
-        TipoTelefone tipo = tipoTelefones.get(Integer.parseInt(tipoTelefone) - 1);
+        TipoTelefone tipo;
+
+        while (true){
+            try{
+                String tipoTelefone = EntradaDados.askSimpleInput(String.format("Tipo do Telefone%s", menuTipos));
+                tipo = tipoTelefones.get(Integer.parseInt(tipoTelefone) - 1);
+                break;
+            }catch (ArrayIndexOutOfBoundsException | NumberFormatException exception){
+                System.out.println("\nEntrada inválida\n");
+            }
+        }
+
 
         String ddi = EntradaDados.askSimpleInput("DDI do Telefone");
         String ddd = EntradaDados.askSimpleInput("DDD do Telefone");
@@ -190,8 +200,19 @@ public class Contato {
                 .map(tipoEndereco -> String.format("%n%s - %s", tipoEndereco.ordinal() + 1, tipoEndereco.name()))
                 .reduce("", String::concat);
 
-        String tipoEndereco = EntradaDados.askSimpleInput(String.format("Tipo do Endereço%s", menuTiposEnderecos));
-        TipoEndereco enumTipoEndereco = tipoEnderecos.get(Integer.parseInt(tipoEndereco) - 1);
+        TipoEndereco enumTipoEndereco;
+
+        while(true){
+            try{
+                String tipoEndereco = EntradaDados.askSimpleInput(String.format("Tipo do Endereço%s", menuTiposEnderecos));
+                enumTipoEndereco = tipoEnderecos.get(Integer.parseInt(tipoEndereco) - 1);
+                break;
+            }catch (ArrayIndexOutOfBoundsException | NumberFormatException exception){
+                System.out.println("\nEntrada inválida\n");
+            }
+        }
+
+
 
 
         String logradouro = EntradaDados.askSimpleInput("Logradouro do Endereço");
