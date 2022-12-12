@@ -90,4 +90,13 @@ public class EntradaDados {
         System.out.println("\nFim do programa!\n");
         System.exit(0);
     }
+
+    public static String obterNomeArquivo(){
+        System.out.print("\nDigite o do arquivo .txt: ");
+        String nomeArquivo = entrada.nextLine().trim();
+        if(!nomeArquivo.contains(".txt")){
+            nomeArquivo += ".txt";
+        }
+        return nomeArquivo;
+    }
 }

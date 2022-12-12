@@ -11,9 +11,16 @@ import java.util.stream.Stream;
 
 public class Arquivo {
 
-    private static Path fileName = Path.of("banco_dados_agenda.txt");
+    private static String nomeArquivoTxt;
+
+    private static Path fileName;
     private static List<String> dadosGravarFile = new ArrayList<>();
     private static List<String> dadosLidosFile = new ArrayList<>();
+
+    public static void atualizarNomeArquivo(){
+        nomeArquivoTxt = EntradaDados.obterNomeArquivo();
+        fileName = Path.of(nomeArquivoTxt);
+    }
 
     private static boolean verificarArquivo() {
         return Files.exists(fileName);
@@ -135,6 +142,13 @@ public class Arquivo {
 
     public static void salvarArquivo(Agenda agenda) {
         try {
+            if(!verificarArquivo()){
+                try{
+                    Files.createFile(fileName);
+                } catch (IOException exception){
+                    exception.printStackTrace();
+                }
+            }
             dadosGravarFile.clear();
             dadosAGravarArquivo(agenda);
             Files.write(fileName, dadosGravarFile);
