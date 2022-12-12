@@ -36,7 +36,7 @@ public class Arquivo {
         } else{
             try{
                 dadosLidosFile =  Files.readAllLines(fileName);
-                System.out.println("\nAegnda atualizada\n");
+                System.out.println("\nAgenda atualizada\n");
             } catch (IOException exception){
                 exception.printStackTrace();
             }
