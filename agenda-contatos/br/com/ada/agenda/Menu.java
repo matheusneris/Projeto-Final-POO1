@@ -64,7 +64,7 @@ public class Menu {
             case "11" -> agenda.listarTelefone();
             case "12" -> agenda.listarEndereco();
             case "13" -> agenda.exibirInformacoesTelefone();
-            case "14" -> agenda.adicionarContato();
+            case "14" -> agenda.exibirInformacoesEndereco();
             default -> System.out.println("Opção inválida!\n");
         }
     }

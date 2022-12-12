@@ -81,7 +81,7 @@ public class Agenda {
             listarContatos();
             System.out.print("Informe o número do ID do contato: ");
             int idContato = EntradaDados.obterNumeroInteiro();
-            if (idContato > contatos.size() || idContato - 1 < 0) {
+            if (idContato > contatos.size() || idContato < 1) {
                 System.out.println("Não existe nenhum contato com esse ID. Tente novamente!");
             } else {
                 contatos.remove(idContato - 1);
@@ -214,6 +214,22 @@ public class Agenda {
                 System.out.println(contato.getTelefonePeloCodigo(idTelefone));
             } else {
                 System.out.println("\nSem telefones cadastrados\n");
+            }
+        } else
+            System.out.println("\nNão há contatos\n");
+    }
+
+    public void exibirInformacoesEndereco() {
+
+        if (Menu.agenda.listaPossuiContatos()) {
+            Menu.agenda.listarContatos();
+            Contato contato = Menu.agenda.obterContato();
+            if (!contato.listaEnderecosVazia()) {
+                contato.listarEnderecos();
+                int idEndereco = EntradaDados.obterId(contato.getEnderecos());
+                System.out.println(contato.getEnderecoPeloCodigo(idEndereco));
+            } else {
+                System.out.println("\nSem endereço cadastrados\n");
             }
         } else
             System.out.println("\nNão há contatos\n");
