@@ -3,13 +3,14 @@ package br.com.ada.agenda;
 
 public class Menu {
     static Agenda agenda = new Agenda();
+    private static boolean salvar;
 
     public static void iniciarMenu() {
 
-        Arquivo.obterDadosArquivo();
-        agenda.setContatos(Arquivo.atualizarAgenda());
+        //Arquivo.obterDadosArquivo();
+        //agenda.setContatos(Arquivo.atualizarAgenda());
 
-        String continuar = "";
+        String continuar;
 
         do {
             System.out.println("""
@@ -31,21 +32,30 @@ public class Menu {
                     12 - Listar todos os endereços de um Contato
                     13 - Exibir todas as informações de um telefone de um Contato
                     14 - Exibir todas as informações de um endereço de um Contato
+                    15 - Exportar dados para um arquivo texto
+                    16 - Importar dados de um arquivo texto
+                    17 - Importar e salvar os dados automaticamente
+                    0 - Encerrar programa
+                    
                     """);
             System.out.printf(">");
 
             Menu.direcionarOpcao(EntradaDados.obterOpcao());
 
-            Arquivo.salvarArquivo(agenda);
+            if(salvar)
+                Arquivo.salvarArquivo(agenda);
 
             continuar = EntradaDados.continuarNoPrograma();
 
         } while (continuar.equals("1"));
+
+        EntradaDados.encerrarPrograma();
     }
 
     public static void direcionarOpcao(String opcao) {
 
         switch (opcao) {
+            case "0" -> EntradaDados.encerrarPrograma();
             case "1" -> agenda.adicionarContato();
             case "2" -> agenda.listarContatos();
             case "3" -> agenda.buscarContato();
@@ -57,9 +67,24 @@ public class Menu {
             case "9" -> agenda.removerEndereco();
             case "10" -> agenda.exibirInformacoesContato();
             case "11" -> agenda.listarTelefone();
-            case "12" -> agenda.adicionarContato();
+            case "12" -> agenda.listarEndereco();
             case "13" -> agenda.exibirInformacoesTelefone();
-            case "14" -> agenda.adicionarContato();
+            case "14" -> agenda.exibirInformacoesEndereco();
+            case "15" -> {
+                Arquivo.atualizarNomeArquivo();
+                Arquivo.salvarArquivo(agenda);
+            }
+            case "16" -> {
+                Arquivo.atualizarNomeArquivo();
+                Arquivo.obterDadosArquivo();
+                agenda.setContatos(Arquivo.atualizarAgenda());
+            }
+            case "17" ->{
+                Arquivo.atualizarNomeArquivo();
+                Arquivo.obterDadosArquivo();
+                agenda.setContatos(Arquivo.atualizarAgenda());
+                salvar = true;
+            }
             default -> System.out.println("Opção inválida!\n");
         }
     }
@@ -69,12 +94,12 @@ public class Menu {
     }
 
     public static void exibirCabecalhoTelefones() {
-        System.out.printf("%-5s %-20s %-15s %-15s %-15s\n", "ID", "Tipo Telefone", "DDI", "DDD", "Numero");
+        System.out.printf("%-5s %-15s %-15s\n", "ID", "DDD", "Numero");
     }
 
     public static void exibirCabecalhoEnderecos() {
-        System.out.printf("%-5s %-20s %-20s %-20s %-12s %-10s %-15s %-20s %-5s\n",
-                "ID", "Tipo",  "Logradouro",  "Bairro ",  "Cep",  "Número",  "Complemento",  "Cidade ",  "UF");
+        System.out.printf("%-5s %-20s %-20s %-10s %-20s %-5s\n",
+                "ID",  "Logradouro",  "Bairro ",  "Número",  "Cidade ",  "UF");
     }
 
 }

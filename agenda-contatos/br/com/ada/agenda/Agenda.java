@@ -48,8 +48,20 @@ public class Agenda {
         JTextArea taListContact = new ListContactGui().getTaListContacts();
 
         if (!this.contatos.isEmpty()) {
+
+            final int pageSize = 3;
+            final var numberOfPages = (int) (Math.ceil(contatos.size() / (float) pageSize));
+            var pageNumber = 1;
+            var loopPagination = true;
+
+            do {
+
             taListContact.append(String.format("%-5s %-15s %-15s %-25s\n", "ID", "Nome", "Sobrenome", "E-mail"));
-            this.contatos.forEach(contato ->
+            this.contatos.stream()
+                    .skip((long) (pageNumber - 1) * pageSize)
+                    .limit(pageSize)
+
+                    .forEach(contato ->
                     taListContact.append(
                             String.format("%-5s %-15s %-15s %-25s\n",
                                     this.contatos.indexOf(contato) + 1,
@@ -57,6 +69,27 @@ public class Agenda {
                                     contato.getSobreNome(),
                                     contato.getEmail())
                     ));
+
+                if (numberOfPages == 1) {
+                    loopPagination = false;
+                } else {
+                    final var selection = EntradaDados.askSimpleInput("""
+                            
+                            Entre:
+                                    <a> para página anterior
+                                    <d> para próxima página
+                                    <x> para finalizar paginação
+                            """).toLowerCase();
+                    switch (selection) {
+                        case "a" -> pageNumber = pageNumber == 1 ? pageNumber : pageNumber - 1;
+                        case "d" -> pageNumber = pageNumber == numberOfPages ? pageNumber : pageNumber + 1;
+                        case "x" -> loopPagination = false;
+                        default -> System.out.println("Seleção inválida, tente novamente");
+                    }
+                }
+            }
+            while (loopPagination);
+
         } else {
             taListContact.append("\nNão há contatos\n");
         }
@@ -91,7 +124,7 @@ public class Agenda {
             listarContatos();
             System.out.print("Informe o número do ID do contato: ");
             int idContato = EntradaDados.obterNumeroInteiro();
-            if (idContato > contatos.size() || idContato - 1 < 0) {
+            if (idContato > contatos.size() || idContato < 1) {
                 System.out.println("Não existe nenhum contato com esse ID. Tente novamente!");
             } else {
                 contatos.remove(idContato - 1);
@@ -101,8 +134,20 @@ public class Agenda {
     }
 
     public void removerTodosContatos() {
-        contatos.clear();
-        System.out.println("Lista de contatos esvaziada.");
+        System.out.println("Tem certeza que deseja excluir todos os seus contatos? 1 - SIM   2 - NÃO");
+        int entradaUsuario;
+        while (true) {
+            entradaUsuario = EntradaDados.obterNumeroInteiro();
+            if (entradaUsuario != 1 && entradaUsuario != 2) {
+                System.out.println("Informe apenas 1 ou 2.");
+            } else {
+                if (entradaUsuario == 1) {
+                    contatos.clear();
+                    System.out.println("Lista de contatos esvaziada.");
+                }
+                break;
+            }
+        }
     }
 
     public void exibirInformacoesContato() {
@@ -129,6 +174,14 @@ public class Agenda {
         if (Menu.agenda.listaPossuiContatos()) {
             Menu.agenda.listarContatos();
             Menu.agenda.obterContato().listarTelefones();
+        } else
+            System.out.println("\nNão há contatos\n");
+    }
+
+    public void listarEndereco() {
+        if (Menu.agenda.listaPossuiContatos()) {
+            Menu.agenda.listarContatos();
+            Menu.agenda.obterContato().listarEnderecos();
         } else
             System.out.println("\nNão há contatos\n");
     }
@@ -202,6 +255,22 @@ public class Agenda {
                 System.out.println(contato.getTelefonePeloCodigo(idTelefone));
             } else {
                 System.out.println("\nSem telefones cadastrados\n");
+            }
+        } else
+            System.out.println("\nNão há contatos\n");
+    }
+
+    public void exibirInformacoesEndereco() {
+
+        if (Menu.agenda.listaPossuiContatos()) {
+            Menu.agenda.listarContatos();
+            Contato contato = Menu.agenda.obterContato();
+            if (!contato.listaEnderecosVazia()) {
+                contato.listarEnderecos();
+                int idEndereco = EntradaDados.obterId(contato.getEnderecos());
+                System.out.println(contato.getEnderecoPeloCodigo(idEndereco));
+            } else {
+                System.out.println("\nSem endereço cadastrados\n");
             }
         } else
             System.out.println("\nNão há contatos\n");

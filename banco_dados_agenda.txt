@@ -1,11 +1,10 @@
-C;Felipe;Z;FL;FL
-T;COMERCIAL;+55;11;999999999999
-T;RESIDENCIAL;+55;18;88888888888
-E;COMERCIAL;Rua abc;Jardimdef;00000005;10;Sem;São Paulo;SP
+C;a;a;a;a
 ;
-C;Bruno;B;BZ;BZ
+C;b;b;b;b
 ;
-C;esd;s;dsd;dss
+C;c;c;c;c
 ;
-C;Adriano;Dias;ADA;asd@email.com
+C;d;d;d;d
+;
+C;h;h;h;h
 ;

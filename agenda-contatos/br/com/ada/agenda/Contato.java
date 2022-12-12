@@ -1,7 +1,6 @@
 package br.com.ada.agenda;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Contato {
 
@@ -25,44 +24,20 @@ public class Contato {
         this.enderecos = new ArrayList<>();
     }
 
-    public Contato(String nome, String sobreNome, String empresa, List<Telefone> telefones, List<Endereco> enderecos) {
-        this.nome = nome;
-        this.sobreNome = sobreNome;
-        this.empresa = empresa;
-        this.telefones = telefones;
-        this.enderecos = enderecos;
-    }
-
     public String getNome() {
         return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getSobreNome() {
         return sobreNome;
     }
 
-    public void setSobreNome(String sobreNome) {
-        this.sobreNome = sobreNome;
-    }
-
     public String getEmpresa() {
         return empresa;
     }
 
-    public void setEmpresa(String empresa) {
-        this.empresa = empresa;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public List<Telefone> getTelefones() {
@@ -102,7 +77,8 @@ public class Contato {
                 Nome: %s
                 Sobrenome: %s
                 Empresa: %s
-                """, nome, sobreNome, empresa
+                Email: %s
+                """, nome, sobreNome, empresa, email
         ));
         sb.append("Telefones:\n\n");
         telefones.forEach(telefones -> sb.append(telefones.toString()).append("\n"));
@@ -112,18 +88,45 @@ public class Contato {
     }
 
     public void listarTelefones() {
+
         if (listaTelefonesVazia()) {
             System.out.println("\nSem Telefones cadastrados\n");
         } else {
-            Menu.exibirCabecalhoTelefones();
-            this.telefones.forEach(telefone -> {
-                System.out.printf("%-5s %-20s %-15s %-15s %-15s\n",
-                        this.telefones.indexOf(telefone) + 1,
-                        telefone.getTipo(),
-                        telefone.getDdi(),
-                        telefone.getDdd(),
-                        telefone.getNumero());
-            });
+            final int pageSize = 3;
+            final var numberOfPages = (int) (Math.ceil(telefones.size() / (float) pageSize));
+            var pageNumber = 1;
+            var loopPagination = true;
+
+            do {
+                Menu.exibirCabecalhoTelefones();
+                this.telefones.stream()
+                        .skip((long) (pageNumber - 1) * pageSize)
+                        .limit(pageSize)
+                        .forEach(telefone ->
+                                System.out.printf("%-5s %-15s %-15s\n",
+                                        this.telefones.indexOf(telefone) + 1,
+                                        telefone.getDdd(),
+                                        telefone.getNumero()));
+
+                if (numberOfPages == 1) {
+                    loopPagination = false;
+                } else {
+                    final var selection = EntradaDados.askSimpleInput("""
+                                                        
+                            Entre:
+                                    <a> para página anterior
+                                    <d> para próxima página
+                                    <x> para finalizar paginação
+                            """).toLowerCase();
+                    switch (selection) {
+                        case "a" -> pageNumber = pageNumber == 1 ? pageNumber : pageNumber - 1;
+                        case "d" -> pageNumber = pageNumber == numberOfPages ? pageNumber : pageNumber + 1;
+                        case "x" -> loopPagination = false;
+                        default -> System.out.println("Seleção inválida, tente novamente");
+                    }
+                }
+            }
+            while (loopPagination);
         }
     }
 
@@ -157,7 +160,7 @@ public class Contato {
 
     public void adicionaTelefone() {
         List<TipoTelefone> tipoTelefones = Arrays.stream(TipoTelefone.values())
-                .collect(Collectors.toList());
+                .toList();
 
         String menuTipos = tipoTelefones.stream()
                 .map(tipoTelefone -> String.format("%n%s - %s", tipoTelefone.ordinal() + 1, tipoTelefone.name()))
@@ -181,7 +184,7 @@ public class Contato {
 
     public void adicionaEndereco() {
         List<TipoEndereco> tipoEnderecos = Arrays.stream(TipoEndereco.values())
-                .collect(Collectors.toList());
+                .toList();
 
         String menuTiposEnderecos = tipoEnderecos.stream()
                 .map(tipoEndereco -> String.format("%n%s - %s", tipoEndereco.ordinal() + 1, tipoEndereco.name()))
@@ -199,7 +202,7 @@ public class Contato {
         String cidade = EntradaDados.askSimpleInput("Cidade do Endereço");
 
         List<Estado> estados = Arrays.stream(Estado.values())
-                .collect(Collectors.toList());
+                .toList();
 
         String menuEstados = estados.stream()
                 .map(estado -> String.format("%n%s - %s", estado.ordinal() + 1, estado.name()))
@@ -217,11 +220,11 @@ public class Contato {
         }
     }
 
-    public Telefone getTelefonePeloCodigo(int codigo){
-        return this.telefones.get(codigo-1);
+    public Telefone getTelefonePeloCodigo(int codigo) {
+        return this.telefones.get(codigo - 1);
     }
 
-    public void removerTelefone(Telefone telefone){
+    public void removerTelefone(Telefone telefone) {
         this.telefones.remove(telefone);
         System.out.println("\nTelefone removido com sucesso\n");
     }
@@ -234,30 +237,54 @@ public class Contato {
         if (listaEnderecosVazia()) {
             System.out.println("\nSem Endereços cadastrados\n");
         } else {
-            Menu.exibirCabecalhoEnderecos();
-            this.enderecos.forEach(endereco -> {
-                System.out.printf("%-5s %-20s %-20s %-20s %-12s %-10s %-15s %-20s %-5s\n",
-                        this.enderecos.indexOf(endereco) + 1,
-                        endereco.getTipo(),
-                        endereco.getLogradouro(),
-                        endereco.getBairro(),
-                        endereco.getCep(),
-                        endereco.getNumero(),
-                        endereco.getComplemento(),
-                        endereco.getCidade(),
-                        endereco.getUf()
-                       );
-            });
+            final int pageSize = 3;
+            final var numberOfPages = (int) (Math.ceil(enderecos.size() / (float) pageSize));
+            var pageNumber = 1;
+            var loopPagination = true;
+
+            do {
+                Menu.exibirCabecalhoEnderecos();
+                this.enderecos.stream()
+                        .skip((long) (pageNumber - 1) * pageSize)
+                        .limit(pageSize)
+                        .forEach(endereco ->
+                                System.out.printf("%-5s %-20s %-20s %-10s %-20s %-5s\n",
+                                        this.enderecos.indexOf(endereco) + 1,
+                                        endereco.getLogradouro(),
+                                        endereco.getBairro(),
+                                        endereco.getNumero(),
+                                        endereco.getCidade(),
+                                        endereco.getUf()
+                                ));
+
+                if (numberOfPages == 1) {
+                    loopPagination = false;
+                } else {
+                    final var selection = EntradaDados.askSimpleInput("""
+                                                        
+                            Entre:
+                                    <a> para página anterior
+                                    <d> para próxima página
+                                    <x> para finalizar paginação
+                            """).toLowerCase();
+                    switch (selection) {
+                        case "a" -> pageNumber = pageNumber == 1 ? pageNumber : pageNumber - 1;
+                        case "d" -> pageNumber = pageNumber == numberOfPages ? pageNumber : pageNumber + 1;
+                        case "x" -> loopPagination = false;
+                        default -> System.out.println("Seleção inválida, tente novamente");
+                    }
+                }
+            }
+            while (loopPagination);
         }
     }
 
     public Endereco getEnderecoPeloCodigo(int idEndereco) {
-        return this.enderecos.get(idEndereco-1);
+        return this.enderecos.get(idEndereco - 1);
     }
 
     public void removerEndereco(Endereco endereco) {
         this.enderecos.remove(endereco);
         System.out.println("\nEndereço removido com sucesso\n");
-
     }
 }
