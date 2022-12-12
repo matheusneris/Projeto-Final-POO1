@@ -33,7 +33,6 @@ public class Agenda {
 
     public void listarContatos() {
 
-        Menu.exibirCabecalhoContatos();
 
         if (!this.contatos.isEmpty()) {
             final int pageSize = 3;
@@ -42,6 +41,8 @@ public class Agenda {
             var loopPagination = true;
 
             do {
+                System.out.printf("Página %d de %d %n", pageNumber, numberOfPages);
+                Menu.exibirCabecalhoContatos();
                 this.contatos.stream()
                         .skip((long) (pageNumber - 1) * pageSize)
                         .limit(pageSize)
@@ -56,7 +57,7 @@ public class Agenda {
                     loopPagination = false;
                 } else {
                     final var selection = EntradaDados.askSimpleInput("""
-                            
+                                                        
                             Entre:
                                     <a> para página anterior
                                     <d> para próxima página

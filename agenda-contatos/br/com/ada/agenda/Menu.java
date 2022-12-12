@@ -5,7 +5,6 @@ import java.nio.file.Path;
 
 public class Menu {
     static Agenda agenda = new Agenda();
-    private static boolean salvar;
 
     public static void iniciarMenu() {
 
@@ -39,7 +38,7 @@ public class Menu {
                     0 - Encerrar programa
                     
                     """);
-            System.out.printf(">");
+            System.out.print(">");
 
             Menu.direcionarOpcao(EntradaDados.obterOpcao());
 
