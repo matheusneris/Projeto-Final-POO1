@@ -13,6 +13,14 @@ public class Arquivo {
     private static final List<String> dadosGravarFile = new ArrayList<>();
     private static List<String> dadosLidosFile = new ArrayList<>();
 
+    public static Path getFileName() {
+        return fileName;
+    }
+
+    public static void setFileName(Path fileName) {
+        Arquivo.fileName = fileName;
+    }
+
     public static void atualizarNomeArquivo(){
         String nomeArquivoTxt = EntradaDados.obterNomeArquivo();
         fileName = Path.of(nomeArquivoTxt);
@@ -28,6 +36,7 @@ public class Arquivo {
         } else{
             try{
                 dadosLidosFile =  Files.readAllLines(fileName);
+                System.out.println("\nAegnda atualizada\n");
             } catch (IOException exception){
                 exception.printStackTrace();
             }
