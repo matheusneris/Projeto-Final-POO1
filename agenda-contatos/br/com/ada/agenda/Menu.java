@@ -3,11 +3,12 @@ package br.com.ada.agenda;
 
 public class Menu {
     static Agenda agenda = new Agenda();
+    private static boolean salvar;
 
     public static void iniciarMenu() {
 
-        Arquivo.obterDadosArquivo();
-        agenda.setContatos(Arquivo.atualizarAgenda());
+        //Arquivo.obterDadosArquivo();
+        //agenda.setContatos(Arquivo.atualizarAgenda());
 
         String continuar = "";
 
@@ -31,6 +32,12 @@ public class Menu {
                     12 - Listar todos os endereços de um Contato
                     13 - Exibir todas as informações de um telefone de um Contato
                     14 - Exibir todas as informações de um endereço de um Contato
+                    15 - Exibir a lista de contatos com paginação
+                    16 - Exibir a lista de telefones com paginação
+                    17 - Exibir a lista de endereços com paginação
+                    18 - Exportar dados para um arquivo texto
+                    19 - Importar dados de um arquivo texto
+                    20 - Importar e salvar os dados automaticamente 
                     0 - Encerrar programa
                     
                     """);
@@ -38,7 +45,8 @@ public class Menu {
 
             Menu.direcionarOpcao(EntradaDados.obterOpcao());
 
-            Arquivo.salvarArquivo(agenda);
+            if(salvar)
+                Arquivo.salvarArquivo(agenda);
 
             continuar = EntradaDados.continuarNoPrograma();
 
@@ -65,6 +73,24 @@ public class Menu {
             case "12" -> agenda.listarEndereco();
             case "13" -> agenda.exibirInformacoesTelefone();
             case "14" -> agenda.exibirInformacoesEndereco();
+            case "15" -> {}
+            case "16" -> {}
+            case "17" -> {}
+            case "18" -> {
+                Arquivo.atualizarNomeArquivo();
+                Arquivo.salvarArquivo(agenda);
+            }
+            case "19" -> {
+                Arquivo.atualizarNomeArquivo();
+                Arquivo.obterDadosArquivo();
+                agenda.setContatos(Arquivo.atualizarAgenda());
+            }
+            case "20" ->{
+                Arquivo.atualizarNomeArquivo();
+                Arquivo.obterDadosArquivo();
+                agenda.setContatos(Arquivo.atualizarAgenda());
+                salvar = true;
+            }
             default -> System.out.println("Opção inválida!\n");
         }
     }
