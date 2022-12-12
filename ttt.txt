@@ -1,0 +1,6 @@
+C;asd;s;aew;aew
+E;RESIDENCIAL;eerfe;er;er;er;er;wer;AM
+E;COMERCIAL;weqre;er;ew;wer;wer;ewr;RR
+E;CAIXA_POSTAL;rer;er;er;ewr;we;r;PR
+E;CAIXA_POSTAL;we;we;eer;re;rer;dd;MA
+;
