@@ -38,8 +38,8 @@ public class Agenda {
         Menu.exibirCabecalhoContatos();
 
         if (!this.contatos.isEmpty()) {
-            final Integer pageSize = 3;
-            final var numberOfPages = (int) Math.ceil(contatos.size() / pageSize.floatValue());
+            final int pageSize = 3;
+            final var numberOfPages = (int) (Math.ceil(contatos.size() / (float) pageSize));
             var pageNumber = 1;
             var loopPagination = true;
 
