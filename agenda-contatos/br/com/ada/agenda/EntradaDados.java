@@ -109,7 +109,7 @@ public class EntradaDados {
     }
 
     public static String obterNomeArquivo(){
-        System.out.print("\nDigite o do arquivo .txt: ");
+        System.out.print("\nDigite o nome do arquivo .txt: ");
         String nomeArquivo = entrada.nextLine().trim();
         if(!nomeArquivo.contains(".txt")){
             nomeArquivo += ".txt";

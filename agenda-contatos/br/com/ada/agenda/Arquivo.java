@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Arquivo {
 
-    private static Path fileName;
+    private static Path fileName = Path.of("banco_dados_agenda.txt");
     private static final List<String> dadosGravarFile = new ArrayList<>();
     private static List<String> dadosLidosFile = new ArrayList<>();
 
