@@ -1,5 +1,8 @@
 C;Maria;Silva;Casas Bahia;Casas Bahia
 T;COMERCIAL;+55;11;999999999
+T;COMERCIAL;+55;11;888888888
+T;CELULAR;+55;83;777777777
+E;COMERCIAL;Rua sem nome;Sem bairro;01010101;1;sem complemento;São Paulo;SP
 ;
 C;José;Souza;Magazine Luiza;Magazine Luiza
 ;
