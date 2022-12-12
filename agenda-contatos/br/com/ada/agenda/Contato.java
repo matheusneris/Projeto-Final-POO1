@@ -98,6 +98,7 @@ public class Contato {
             var loopPagination = true;
 
             do {
+                System.out.printf("Página %d de %d %n", pageNumber, numberOfPages);
                 Menu.exibirCabecalhoTelefones();
                 this.telefones.stream()
                         .skip((long) (pageNumber - 1) * pageSize)
@@ -264,6 +265,7 @@ public class Contato {
             var loopPagination = true;
 
             do {
+                System.out.printf("Página %d de %d %n", pageNumber, numberOfPages);
                 Menu.exibirCabecalhoEnderecos();
                 this.enderecos.stream()
                         .skip((long) (pageNumber - 1) * pageSize)
