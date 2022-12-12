@@ -1,10 +1,13 @@
-C;a;a;a;a
+C;Maria;Silva;Casas Bahia;Casas Bahia
+T;COMERCIAL;+55;11;999999999
 ;
-C;b;b;b;b
+C;José;Souza;Magazine Luiza;Magazine Luiza
 ;
-C;c;c;c;c
+C;Thiago;Sol;Ada;Ada
 ;
-C;d;d;d;d
+C;Alex;Araujo;Ada;Ada
 ;
-C;h;h;h;h
+C;Felipe;Zanardo;Prefeitura;Prefeitura
+;
+C;João;Campos;Sabesp;Sabesp
 ;

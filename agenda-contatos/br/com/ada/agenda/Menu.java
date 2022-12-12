@@ -7,8 +7,8 @@ public class Menu {
 
     public static void iniciarMenu() {
 
-        //Arquivo.obterDadosArquivo();
-        //agenda.setContatos(Arquivo.atualizarAgenda());
+        Arquivo.obterDadosArquivo();
+        agenda.setContatos(Arquivo.atualizarAgenda());
 
         String continuar;
 
@@ -34,7 +34,6 @@ public class Menu {
                     14 - Exibir todas as informações de um endereço de um Contato
                     15 - Exportar dados para um arquivo texto
                     16 - Importar dados de um arquivo texto
-                    17 - Importar e salvar os dados automaticamente
                     0 - Encerrar programa
                     
                     """);
@@ -42,8 +41,7 @@ public class Menu {
 
             Menu.direcionarOpcao(EntradaDados.obterOpcao());
 
-            if(salvar)
-                Arquivo.salvarArquivo(agenda);
+            Arquivo.salvarArquivo(agenda);
 
             continuar = EntradaDados.continuarNoPrograma();
 
@@ -73,17 +71,13 @@ public class Menu {
             case "15" -> {
                 Arquivo.atualizarNomeArquivo();
                 Arquivo.salvarArquivo(agenda);
+                System.out.println("\nDados salvo com sucesso\n");
             }
             case "16" -> {
                 Arquivo.atualizarNomeArquivo();
                 Arquivo.obterDadosArquivo();
                 agenda.setContatos(Arquivo.atualizarAgenda());
-            }
-            case "17" ->{
-                Arquivo.atualizarNomeArquivo();
-                Arquivo.obterDadosArquivo();
-                agenda.setContatos(Arquivo.atualizarAgenda());
-                salvar = true;
+                System.out.println("\nAgenda atualizada\n");
             }
             default -> System.out.println("Opção inválida!\n");
         }
