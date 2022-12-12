@@ -256,17 +256,47 @@ public class Contato {
         if (listaEnderecosVazia()) {
             System.out.println("\nSem Endereços cadastrados\n");
         } else {
-            Menu.exibirCabecalhoEnderecos();
-            this.enderecos.forEach(endereco -> {
-                System.out.printf("%-5s %-20s %-20s %-10s %-20s %-5s\n",
-                        this.enderecos.indexOf(endereco) + 1,
-                        endereco.getLogradouro(),
-                        endereco.getBairro(),
-                        endereco.getNumero(),
-                        endereco.getCidade(),
-                        endereco.getUf()
-                );
-            });
+            final int pageSize = 3;
+            final var numberOfPages = (int) (Math.ceil(enderecos.size() / (float) pageSize));
+            var pageNumber = 1;
+            var loopPagination = true;
+
+            do {
+                Menu.exibirCabecalhoEnderecos();
+                this.enderecos.stream()
+                        .skip((pageNumber - 1) * pageSize)
+                        .limit(pageSize)
+                        .forEach(endereco ->
+                        {
+                            System.out.printf("%-5s %-20s %-20s %-10s %-20s %-5s\n",
+                                    this.enderecos.indexOf(endereco) + 1,
+                                    endereco.getLogradouro(),
+                                    endereco.getBairro(),
+                                    endereco.getNumero(),
+                                    endereco.getCidade(),
+                                    endereco.getUf()
+                            );
+                        });
+
+                if (numberOfPages == 1) {
+                    loopPagination = false;
+                } else {
+                    final var selection = EntradaDados.askSimpleInput("""
+                                                        
+                            Entre:
+                                    <a> para página anterior
+                                    <d> para próxima página
+                                    <x> para finalizar paginação
+                            """).toLowerCase();
+                    switch (selection) {
+                        case "a" -> pageNumber = pageNumber == 1 ? pageNumber : pageNumber - 1;
+                        case "d" -> pageNumber = pageNumber == numberOfPages ? pageNumber : pageNumber + 1;
+                        case "x" -> loopPagination = false;
+                        default -> System.out.println("Seleção inválida, tente novamente");
+                    }
+                }
+            }
+            while (loopPagination);
         }
     }
 
