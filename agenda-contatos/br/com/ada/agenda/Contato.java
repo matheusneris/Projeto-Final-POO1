@@ -213,9 +213,6 @@ public class Contato {
             }
         }
 
-
-
-
         String logradouro = EntradaDados.askSimpleInput("Logradouro do Endereço");
         String bairro = EntradaDados.askSimpleInput("Bairro do Endereço");
         String cep = EntradaDados.askSimpleInput("CEP do Endereço");
@@ -230,11 +227,20 @@ public class Contato {
                 .map(estado -> String.format("%n%s - %s", estado.ordinal() + 1, estado.name()))
                 .reduce("", String::concat);
 
-        String estado = EntradaDados.askSimpleInput(String.format("Estado%s", menuEstados));
-        Estado enumTipoEstado = estados.get(Integer.parseInt(estado) - 1);
+        Estado enumTipoEstado;
+
+        while(true){
+            try{
+                String estado = EntradaDados.askSimpleInput(String.format("Estado%s", menuEstados));
+                enumTipoEstado = estados.get(Integer.parseInt(estado) - 1);
+                break;
+            }catch (ArrayIndexOutOfBoundsException | NumberFormatException exception){
+                System.out.printf("Escolha uma opção entre 1 e %s \n", estados.size());
+            }
+        }
 
         Endereco endereco = new Endereco(enumTipoEndereco, logradouro, bairro, cep, numero, complemento, cidade, enumTipoEstado);
-
+        
         try {
             addEndereco(endereco);
         } catch (RuntimeException exception) {

@@ -12,3 +12,8 @@ C;João;Campos;Sabesp;Sabesp
 ;
 C;Manuel;Costa;Ada;Ada
 ;
+C;Ana;t;a;a
+E;COMERCIAL;a;a;a;a;a;a;RO
+E;RESIDENCIAL;a;a;a;a;a;a;AM
+E;COMERCIAL;a;a;a;a;a;a;AC
+;
