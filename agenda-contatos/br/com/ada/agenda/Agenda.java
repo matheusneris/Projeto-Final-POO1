@@ -1,23 +1,36 @@
 package br.com.ada.agenda;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Agenda {
     private List<Contato> contatos;
+    private AddContactGui addContactGui;
 
     public Agenda() {
         this.contatos = new ArrayList<>();
+        this.addContactGui = new AddContactGui();
+    }
+
+    public void showAddContactGui() {
+        addContactGui.setVisible(true);
     }
 
     public void adicionarContato() {
 
-        String nome = EntradaDados.obterNome();
-        String sobreNome = EntradaDados.obterSobrenome();
-        String email = EntradaDados.obterEmail();
-        String empresa = EntradaDados.obterEmpresa();
+        String nome = addContactGui.getTfNome().getText();
+        String sobreNome = addContactGui.getTfSobrenome().getText();
+        String email = addContactGui.getTfEmail().getText();
+        String empresa = addContactGui.getTfEmpresa().getText();
         Contato novoContato = new Contato(nome, sobreNome, empresa, email);
+
+        addContactGui.getTfNome().setText("");
+        addContactGui.getTfSobrenome().setText("");
+        addContactGui.getTfEmail().setText("");
+        addContactGui.getTfEmpresa().setText("");
+
 
         if (!contatoJaExiste(novoContato)) {
             this.contatos.add(novoContato);
@@ -32,21 +45,20 @@ public class Agenda {
     }
 
     public void listarContatos() {
-
-        Menu.exibirCabecalhoContatos();
+        JTextArea taListContact = new ListContactGui().getTaListContacts();
 
         if (!this.contatos.isEmpty()) {
-
+            taListContact.append(String.format("%-5s %-15s %-15s %-25s\n", "ID", "Nome", "Sobrenome", "E-mail"));
             this.contatos.forEach(contato ->
-                    System.out.printf("%-5s %-15s %-15s %-25s\n",
-                            this.contatos.indexOf(contato) + 1,
-                            contato.getNome(),
-                            contato.getSobreNome(),
-                            contato.getEmail())
-            );
-
+                    taListContact.append(
+                            String.format("%-5s %-15s %-15s %-25s\n",
+                                    this.contatos.indexOf(contato) + 1,
+                                    contato.getNome(),
+                                    contato.getSobreNome(),
+                                    contato.getEmail())
+                    ));
         } else {
-            System.out.println("\nNão há contatos\n");
+            taListContact.append("\nNão há contatos\n");
         }
     }
 
