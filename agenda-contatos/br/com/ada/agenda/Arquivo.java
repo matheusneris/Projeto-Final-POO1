@@ -5,29 +5,25 @@ import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class Arquivo {
 
-    private static String nomeArquivoTxt;
-
     private static Path fileName;
-    private static List<String> dadosGravarFile = new ArrayList<>();
+    private static final List<String> dadosGravarFile = new ArrayList<>();
     private static List<String> dadosLidosFile = new ArrayList<>();
 
     public static void atualizarNomeArquivo(){
-        nomeArquivoTxt = EntradaDados.obterNomeArquivo();
+        String nomeArquivoTxt = EntradaDados.obterNomeArquivo();
         fileName = Path.of(nomeArquivoTxt);
     }
 
-    private static boolean verificarArquivo() {
-        return Files.exists(fileName);
+    private static boolean arquivoNaoExiste() {
+        return !Files.exists(fileName);
     }
 
     public static void obterDadosArquivo(){
-        if (!verificarArquivo()){
+        if (arquivoNaoExiste()){
             System.out.println("\nEsse arquivo não existe\n");
         } else{
             try{
@@ -95,7 +91,6 @@ public class Arquivo {
 
     public static void dadosAGravarArquivo(Agenda agenda){
         List<Contato> contatos = agenda.getContatos();
-        List<String> dados = new ArrayList<>();
 
         for (Contato contato : contatos){
             String dadoContato =
@@ -133,16 +128,13 @@ public class Arquivo {
                                     endereco.getUf();
                     dadosGravarFile.add(dadoEndereco);
                 }
-
             dadosGravarFile.add(";");
-
         }
-
     }
 
     public static void salvarArquivo(Agenda agenda) {
         try {
-            if(!verificarArquivo()){
+            if(arquivoNaoExiste()){
                 try{
                     Files.createFile(fileName);
                 } catch (IOException exception){
@@ -160,9 +152,4 @@ public class Arquivo {
             throw new RuntimeException(e);
         }
     }
-
-
-
-
-
 }

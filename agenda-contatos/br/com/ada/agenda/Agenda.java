@@ -1,10 +1,8 @@
 package br.com.ada.agenda;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
 
 public class Agenda {
     private List<Contato> contatos;
@@ -45,7 +43,7 @@ public class Agenda {
 
             do {
                 this.contatos.stream()
-                        .skip((pageNumber - 1) * pageSize)
+                        .skip((long) (pageNumber - 1) * pageSize)
                         .limit(pageSize)
                         .forEach(contato ->
                                 System.out.printf("%-5s %-15s %-15s %-25s\n",
@@ -128,10 +126,8 @@ public class Agenda {
                 if (entradaUsuario == 1) {
                     contatos.clear();
                     System.out.println("Lista de contatos esvaziada.");
-                    break;
-                } else {
-                    break;
                 }
+                break;
             }
         }
     }

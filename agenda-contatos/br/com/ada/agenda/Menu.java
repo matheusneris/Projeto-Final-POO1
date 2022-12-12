@@ -10,7 +10,7 @@ public class Menu {
         //Arquivo.obterDadosArquivo();
         //agenda.setContatos(Arquivo.atualizarAgenda());
 
-        String continuar = "";
+        String continuar;
 
         do {
             System.out.println("""
@@ -34,7 +34,7 @@ public class Menu {
                     14 - Exibir todas as informações de um endereço de um Contato
                     15 - Exportar dados para um arquivo texto
                     16 - Importar dados de um arquivo texto
-                    17 - Importar e salvar os dados automaticamente 
+                    17 - Importar e salvar os dados automaticamente
                     0 - Encerrar programa
                     
                     """);
