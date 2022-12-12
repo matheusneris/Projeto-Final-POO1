@@ -105,16 +105,47 @@ public class Contato {
     }
 
     public void listarTelefones() {
+
         if (listaTelefonesVazia()) {
             System.out.println("\nSem Telefones cadastrados\n");
         } else {
-            Menu.exibirCabecalhoTelefones();
-            this.telefones.forEach(telefone -> {
-                System.out.printf("%-5s %-15s %-15s\n",
-                        this.telefones.indexOf(telefone) + 1,
-                        telefone.getDdd(),
-                        telefone.getNumero());
-            });
+            final int pageSize = 3;
+            final var numberOfPages = (int) (Math.ceil(telefones.size() / (float) pageSize));
+            var pageNumber = 1;
+            var loopPagination = true;
+
+            do {
+                Menu.exibirCabecalhoTelefones();
+                this.telefones.stream()
+                        .skip((pageNumber - 1) * pageSize)
+                        .limit(pageSize)
+                        .forEach(telefone ->
+                        {
+                            System.out.printf("%-5s %-15s %-15s\n",
+                                    this.telefones.indexOf(telefone) + 1,
+                                    telefone.getDdd(),
+                                    telefone.getNumero());
+                        });
+
+                if (numberOfPages == 1) {
+                    loopPagination = false;
+                } else {
+                    final var selection = EntradaDados.askSimpleInput("""
+                                                        
+                            Entre:
+                                    <a> para página anterior
+                                    <d> para próxima página
+                                    <x> para finalizar paginação
+                            """).toLowerCase();
+                    switch (selection) {
+                        case "a" -> pageNumber = pageNumber == 1 ? pageNumber : pageNumber - 1;
+                        case "d" -> pageNumber = pageNumber == numberOfPages ? pageNumber : pageNumber + 1;
+                        case "x" -> loopPagination = false;
+                        default -> System.out.println("Seleção inválida, tente novamente");
+                    }
+                }
+            }
+            while (loopPagination);
         }
     }
 
@@ -208,11 +239,11 @@ public class Contato {
         }
     }
 
-    public Telefone getTelefonePeloCodigo(int codigo){
-        return this.telefones.get(codigo-1);
+    public Telefone getTelefonePeloCodigo(int codigo) {
+        return this.telefones.get(codigo - 1);
     }
 
-    public void removerTelefone(Telefone telefone){
+    public void removerTelefone(Telefone telefone) {
         this.telefones.remove(telefone);
         System.out.println("\nTelefone removido com sucesso\n");
     }
@@ -234,13 +265,13 @@ public class Contato {
                         endereco.getNumero(),
                         endereco.getCidade(),
                         endereco.getUf()
-                       );
+                );
             });
         }
     }
 
     public Endereco getEnderecoPeloCodigo(int idEndereco) {
-        return this.enderecos.get(idEndereco-1);
+        return this.enderecos.get(idEndereco - 1);
     }
 
     public void removerEndereco(Endereco endereco) {
