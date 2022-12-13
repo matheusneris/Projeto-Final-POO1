@@ -9,9 +9,17 @@ import java.util.List;
 
 public class Arquivo {
 
-    private static Path fileName;
+    private static Path fileName = Path.of("banco_dados_agenda.txt");
     private static final List<String> dadosGravarFile = new ArrayList<>();
     private static List<String> dadosLidosFile = new ArrayList<>();
+
+    public static Path getFileName() {
+        return fileName;
+    }
+
+    public static void setFileName(Path fileName) {
+        Arquivo.fileName = fileName;
+    }
 
     public static void atualizarNomeArquivo(){
         String nomeArquivoTxt = EntradaDados.obterNomeArquivo();
@@ -28,6 +36,7 @@ public class Arquivo {
         } else{
             try{
                 dadosLidosFile =  Files.readAllLines(fileName);
+                System.out.println("\nAgenda atualizada\n");
             } catch (IOException exception){
                 exception.printStackTrace();
             }

@@ -98,6 +98,7 @@ public class Contato {
             var loopPagination = true;
 
             do {
+                System.out.printf("Página %d de %d %n", pageNumber, numberOfPages);
                 Menu.exibirCabecalhoTelefones();
                 this.telefones.stream()
                         .skip((long) (pageNumber - 1) * pageSize)
@@ -166,8 +167,18 @@ public class Contato {
                 .map(tipoTelefone -> String.format("%n%s - %s", tipoTelefone.ordinal() + 1, tipoTelefone.name()))
                 .reduce("", String::concat);
 
-        String tipoTelefone = EntradaDados.askSimpleInput(String.format("Tipo do Telefone%s", menuTipos));
-        TipoTelefone tipo = tipoTelefones.get(Integer.parseInt(tipoTelefone) - 1);
+        TipoTelefone tipo;
+
+        while (true){
+            try{
+                String tipoTelefone = EntradaDados.askSimpleInput(String.format("Tipo do Telefone%s", menuTipos));
+                tipo = tipoTelefones.get(Integer.parseInt(tipoTelefone) - 1);
+                break;
+            }catch (ArrayIndexOutOfBoundsException | NumberFormatException exception){
+                System.out.println("\nEntrada inválida\n");
+            }
+        }
+
 
         String ddi = EntradaDados.askSimpleInput("DDI do Telefone");
         String ddd = EntradaDados.askSimpleInput("DDD do Telefone");
@@ -190,9 +201,17 @@ public class Contato {
                 .map(tipoEndereco -> String.format("%n%s - %s", tipoEndereco.ordinal() + 1, tipoEndereco.name()))
                 .reduce("", String::concat);
 
-        String tipoEndereco = EntradaDados.askSimpleInput(String.format("Tipo do Endereço%s", menuTiposEnderecos));
-        TipoEndereco enumTipoEndereco = tipoEnderecos.get(Integer.parseInt(tipoEndereco) - 1);
+        TipoEndereco enumTipoEndereco;
 
+        while(true){
+            try{
+                String tipoEndereco = EntradaDados.askSimpleInput(String.format("Tipo do Endereço%s", menuTiposEnderecos));
+                enumTipoEndereco = tipoEnderecos.get(Integer.parseInt(tipoEndereco) - 1);
+                break;
+            }catch (ArrayIndexOutOfBoundsException | NumberFormatException exception){
+                System.out.println("\nEntrada inválida\n");
+            }
+        }
 
         String logradouro = EntradaDados.askSimpleInput("Logradouro do Endereço");
         String bairro = EntradaDados.askSimpleInput("Bairro do Endereço");
@@ -208,11 +227,20 @@ public class Contato {
                 .map(estado -> String.format("%n%s - %s", estado.ordinal() + 1, estado.name()))
                 .reduce("", String::concat);
 
-        String estado = EntradaDados.askSimpleInput(String.format("Estado%s", menuEstados));
-        Estado enumTipoEstado = estados.get(Integer.parseInt(estado) - 1);
+        Estado enumTipoEstado;
+
+        while(true){
+            try{
+                String estado = EntradaDados.askSimpleInput(String.format("Estado%s", menuEstados));
+                enumTipoEstado = estados.get(Integer.parseInt(estado) - 1);
+                break;
+            }catch (ArrayIndexOutOfBoundsException | NumberFormatException exception){
+                System.out.printf("Escolha uma opção entre 1 e %s \n", estados.size());
+            }
+        }
 
         Endereco endereco = new Endereco(enumTipoEndereco, logradouro, bairro, cep, numero, complemento, cidade, enumTipoEstado);
-
+        
         try {
             addEndereco(endereco);
         } catch (RuntimeException exception) {
@@ -243,6 +271,7 @@ public class Contato {
             var loopPagination = true;
 
             do {
+                System.out.printf("Página %d de %d %n", pageNumber, numberOfPages);
                 Menu.exibirCabecalhoEnderecos();
                 this.enderecos.stream()
                         .skip((long) (pageNumber - 1) * pageSize)

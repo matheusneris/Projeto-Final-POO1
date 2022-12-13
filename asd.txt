@@ -1,2 +1,12 @@
-C;asd;d;ada;asd@email.com
+C;Maria;Silva;Casas Bahia;Casas Bahia
+;
+C;José;Souza;Magazine Luiza;Magazine Luiza
+;
+C;Thiago;Sol;Ada;Ada
+;
+C;Alex;Araujo;Ada;Ada
+;
+C;Felipe;Zanardo;Prefeitura;Prefeitura
+;
+C;João;Campos;Sabesp;Sabesp
 ;

@@ -1,14 +1,15 @@
 package br.com.ada.agenda;
 
 
+import java.nio.file.Path;
+
 public class Menu {
     static Agenda agenda = new Agenda();
-    private static boolean salvar;
 
     public static void iniciarMenu() {
 
-        //Arquivo.obterDadosArquivo();
-        //agenda.setContatos(Arquivo.atualizarAgenda());
+        Arquivo.obterDadosArquivo();
+        agenda.setContatos(Arquivo.atualizarAgenda());
 
         String continuar;
 
@@ -34,16 +35,14 @@ public class Menu {
                     14 - Exibir todas as informações de um endereço de um Contato
                     15 - Exportar dados para um arquivo texto
                     16 - Importar dados de um arquivo texto
-                    17 - Importar e salvar os dados automaticamente
                     0 - Encerrar programa
                     
                     """);
-            System.out.printf(">");
+            System.out.print(">");
 
             Menu.direcionarOpcao(EntradaDados.obterOpcao());
 
-            if(salvar)
-                Arquivo.salvarArquivo(agenda);
+            Arquivo.salvarArquivo(agenda);
 
             continuar = EntradaDados.continuarNoPrograma();
 
@@ -71,19 +70,18 @@ public class Menu {
             case "13" -> agenda.exibirInformacoesTelefone();
             case "14" -> agenda.exibirInformacoesEndereco();
             case "15" -> {
+                Path path = Arquivo.getFileName();
                 Arquivo.atualizarNomeArquivo();
                 Arquivo.salvarArquivo(agenda);
+                System.out.println("\nDados salvo com sucesso\n");
+                Arquivo.setFileName(path);
             }
             case "16" -> {
+                Path path = Arquivo.getFileName();
                 Arquivo.atualizarNomeArquivo();
                 Arquivo.obterDadosArquivo();
                 agenda.setContatos(Arquivo.atualizarAgenda());
-            }
-            case "17" ->{
-                Arquivo.atualizarNomeArquivo();
-                Arquivo.obterDadosArquivo();
-                agenda.setContatos(Arquivo.atualizarAgenda());
-                salvar = true;
+                Arquivo.setFileName(path);
             }
             default -> System.out.println("Opção inválida!\n");
         }

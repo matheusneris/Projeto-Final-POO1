@@ -45,7 +45,9 @@ public class Agenda {
     }
 
     public void listarContatos() {
+
         JTextArea taListContact = new ListContactGui().getTaListContacts();
+
 
         if (!this.contatos.isEmpty()) {
 
@@ -55,7 +57,6 @@ public class Agenda {
             var loopPagination = true;
 
             do {
-
             taListContact.append(String.format("%-5s %-15s %-15s %-25s\n", "ID", "Nome", "Sobrenome", "E-mail"));
             this.contatos.stream()
                     .skip((long) (pageNumber - 1) * pageSize)
@@ -74,7 +75,7 @@ public class Agenda {
                     loopPagination = false;
                 } else {
                     final var selection = EntradaDados.askSimpleInput("""
-                            
+                                                        
                             Entre:
                                     <a> para página anterior
                                     <d> para próxima página
