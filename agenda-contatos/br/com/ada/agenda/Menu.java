@@ -81,6 +81,8 @@ public class Menu {
                 Arquivo.atualizarNomeArquivo();
                 Arquivo.obterDadosArquivo();
                 agenda.setContatos(Arquivo.atualizarAgenda());
+                if(!Arquivo.arquivoNaoExiste())
+                    System.out.println("\nAgenda atualizada\n");
                 Arquivo.setFileName(path);
             }
             default -> System.out.println("Opção inválida!\n");

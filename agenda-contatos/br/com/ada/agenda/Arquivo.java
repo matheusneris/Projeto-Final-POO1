@@ -26,7 +26,7 @@ public class Arquivo {
         fileName = Path.of(nomeArquivoTxt);
     }
 
-    private static boolean arquivoNaoExiste() {
+    public static boolean arquivoNaoExiste() {
         return !Files.exists(fileName);
     }
 
@@ -36,7 +36,6 @@ public class Arquivo {
         } else{
             try{
                 dadosLidosFile =  Files.readAllLines(fileName);
-                System.out.println("\nAgenda atualizada\n");
             } catch (IOException exception){
                 exception.printStackTrace();
             }
@@ -56,7 +55,7 @@ public class Arquivo {
                     String nome = dadosContato[1];
                     String sobrenome = dadosContato[2];
                     String empresa = dadosContato[3];
-                    String email = dadosContato[3];
+                    String email = dadosContato[4];
                     contato = new Contato(nome, sobrenome, empresa, email);
                 }
                 if (linha.startsWith("T")) {
