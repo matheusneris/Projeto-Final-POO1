@@ -26,7 +26,7 @@ public class Arquivo {
         fileName = Path.of(nomeArquivoTxt);
     }
 
-    private static boolean arquivoNaoExiste() {
+    public static boolean arquivoNaoExiste() {
         return !Files.exists(fileName);
     }
 
@@ -36,7 +36,6 @@ public class Arquivo {
         } else{
             try{
                 dadosLidosFile =  Files.readAllLines(fileName);
-                System.out.println("\nAgenda atualizada\n");
             } catch (IOException exception){
                 exception.printStackTrace();
             }

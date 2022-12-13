@@ -1,2 +1,40 @@
-C;Adriano;Dias;Ada;asd@my.mail
+C;José;Maria;Casas Bahia;jose.maria@hotmail.com
+T;COMERCIAL;+55;18;999999999
+T;RESIDENCIAL;+55;17;888888888
+T;CELULAR;+55;11;777777777
+E;COMERCIAL;Rua dos Patriotas;Vila Monumento;04261050;20;Nenhum;São Paulo;SP
+E;RESIDENCIAL;Av. Conde Francisco Matarazzo;Centro;09520900;100;Nenhum;São Caetano do Sul;SP
+E;CAIXA_POSTAL;Rua João Pessoa;Centro;11013001;89;Nenhum;Santos;SP
+;
+C;Thiago;Silva;Chelsea;thiago_silva@gmail.com
+;
+C;Matheus;Martins;Magazine Luiza;m_martins@gmail.com
+E;COMERCIAL;Parque Nacional da Tijuca;Alto da Boa Vista;68741472;20;Cristo;Rio de Janeiro;RJ
+E;RESIDENCIAL;Avenida Mem de Sá;Centro;20230151;10;Nenhum;Rio de Janeiro;RJ
+;
+C;Manuel;Ferreira;Ultragaz;manu_ferreira@hotmail.com
+T;COMERCIAL;+55;83;40041044
+T;CELULAR;+55;83;40048888
+;
+C;Lucas;Costa;Acer;lucas-costa@outlook.com
+T;COMERCIAL;+55;11;55033588
+E;COMERCIAL;Avenida Tamboré;Alphaville Industrial;06460000;267;16 andar;Barueri;SP
+;
+C;Lucas;Pires;Telefônica;l.pires@gmail.com
+E;RESIDENCIAL;Rua da União;Jardim Sonia Maria;09380250;119;Nenhum;Mauá;SP
+;
+C;Helena;Barbosa;Assaí;helena_barb@hotmail.com
+T;COMERCIAL;+55;92;32472251
+T;COMERCIAL;+55;92;32472252
+E;COMERCIAL;Avenida Autaz Mirim;Novo Aleixo;69099045;8755;Nenhum;Manaus;AM
+;
+C;Maria;Souza;Samsung;m_souza@outlook.com
+T;COMERCIAL;+55;11;40040000
+;
+C;Cláudia;Fernandes;Nivea;clau.fernandes@hotmail.com
+;
+C;Luís;Bueno;LG;luisbueno@gmail.com
+;
+C;Ana;Amorim;Tim;ana@gmail.com
+T;CELULAR;+55;11;981600000
 ;

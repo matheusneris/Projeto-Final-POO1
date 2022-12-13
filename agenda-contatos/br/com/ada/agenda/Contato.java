@@ -78,6 +78,7 @@ public class Contato {
                 Sobrenome: %s
                 Empresa: %s
                 Email: %s
+                
                 """, nome, sobreNome, empresa, email
         ));
         sb.append("Telefones:\n\n");
