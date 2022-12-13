@@ -278,7 +278,7 @@ public class Contato {
                         .skip((long) (pageNumber - 1) * pageSize)
                         .limit(pageSize)
                         .forEach(endereco ->
-                                System.out.printf("%-5s %-20s %-20s %-10s %-20s %-5s\n",
+                                System.out.printf("%-5s %-40s %-20s %-10s %-20s %-5s\n",
                                         this.enderecos.indexOf(endereco) + 1,
                                         endereco.getLogradouro(),
                                         endereco.getBairro(),

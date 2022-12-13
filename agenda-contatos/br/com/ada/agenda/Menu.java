@@ -98,7 +98,7 @@ public class Menu {
     }
 
     public static void exibirCabecalhoEnderecos() {
-        System.out.printf("%-5s %-20s %-20s %-10s %-20s %-5s\n",
+        System.out.printf("%-5s %-40s %-20s %-10s %-20s %-5s\n",
                 "ID",  "Logradouro",  "Bairro ",  "Número",  "Cidade ",  "UF");
     }
 
