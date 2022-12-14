@@ -56,7 +56,7 @@ public class Arquivo {
                     String nome = dadosContato[1];
                     String sobrenome = dadosContato[2];
                     String empresa = dadosContato[3];
-                    String email = dadosContato[3];
+                    String email = dadosContato[4];
                     contato = new Contato(nome, sobrenome, empresa, email);
                 }
                 if (linha.startsWith("T")) {

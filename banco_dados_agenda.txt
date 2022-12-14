@@ -1,19 +1,12 @@
-C;Maria;Silva;Casas Bahia;Casas Bahia
+C;Adriano;Dias;Ada;adriano@my.mail
 ;
-C;José;Souza;Magazine Luiza;Magazine Luiza
+C;Teste;Sn;Ada;teste@tt.tt
 ;
-C;Thiago;Sol;Ada;Ada
+C;José;Silva;Ada;ze.silva@ada.com
 ;
-C;Alex;Araujo;Ada;Ada
+C;Maria;Socorro;Ada;mary@ada.com
 ;
-C;Felipe;Zanardo;Prefeitura;Prefeitura
+C;Contato5;Hall;sdf;hal@jj.bb
 ;
-C;João;Campos;Sabesp;Sabesp
-;
-C;Manuel;Costa;Ada;Ada
-;
-C;Ana;t;a;a
-E;COMERCIAL;a;a;a;a;a;a;RO
-E;RESIDENCIAL;a;a;a;a;a;a;AM
-E;COMERCIAL;a;a;a;a;a;a;AC
+C;ioioi;oioioi;oppopo;oioioi@sds.sds
 ;

@@ -1,6 +1,5 @@
 package br.com.ada.agenda;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,14 +10,13 @@ public class Agenda {
 
     public Agenda() {
         this.contatos = new ArrayList<>();
-        this.addContactGui = new AddContactGui();
-    }
-
-    public void showAddContactGui() {
-        addContactGui.setVisible(true);
     }
 
     public void adicionarContato() {
+        addContactGui = new AddContactGui(this);
+    }
+
+    public String saveContact() {
 
         String nome = addContactGui.getTfNome().getText();
         String sobreNome = addContactGui.getTfSobrenome().getText();
@@ -31,12 +29,11 @@ public class Agenda {
         addContactGui.getTfEmail().setText("");
         addContactGui.getTfEmpresa().setText("");
 
-
         if (!contatoJaExiste(novoContato)) {
             this.contatos.add(novoContato);
-            System.out.println("\nContato adicionado com sucesso!\n");
+            return "Contato adicionado com sucesso!";
         } else
-            System.out.println("\nO contato já existe\n");
+            return "O contato já existe";
     }
 
     public boolean contatoJaExiste(Contato novoContato) {
@@ -45,56 +42,30 @@ public class Agenda {
     }
 
     public void listarContatos() {
-
-        JTextArea taListContact = new ListContactGui().getTaListContacts();
-
-
-        if (!this.contatos.isEmpty()) {
-
-            final int pageSize = 3;
-            final var numberOfPages = (int) (Math.ceil(contatos.size() / (float) pageSize));
-            var pageNumber = 1;
-            var loopPagination = true;
-
-            do {
-            taListContact.append(String.format("%-5s %-15s %-15s %-25s\n", "ID", "Nome", "Sobrenome", "E-mail"));
-            this.contatos.stream()
-                    .skip((long) (pageNumber - 1) * pageSize)
-                    .limit(pageSize)
-
-                    .forEach(contato ->
-                    taListContact.append(
-                            String.format("%-5s %-15s %-15s %-25s\n",
-                                    this.contatos.indexOf(contato) + 1,
-                                    contato.getNome(),
-                                    contato.getSobreNome(),
-                                    contato.getEmail())
-                    ));
-
-                if (numberOfPages == 1) {
-                    loopPagination = false;
-                } else {
-                    final var selection = EntradaDados.askSimpleInput("""
-                                                        
-                            Entre:
-                                    <a> para página anterior
-                                    <d> para próxima página
-                                    <x> para finalizar paginação
-                            """).toLowerCase();
-                    switch (selection) {
-                        case "a" -> pageNumber = pageNumber == 1 ? pageNumber : pageNumber - 1;
-                        case "d" -> pageNumber = pageNumber == numberOfPages ? pageNumber : pageNumber + 1;
-                        case "x" -> loopPagination = false;
-                        default -> System.out.println("Seleção inválida, tente novamente");
-                    }
-                }
-            }
-            while (loopPagination);
-
-        } else {
-            taListContact.append("\nNão há contatos\n");
-        }
+        ListContactGui taListContact = new ListContactGui(this, contatos);
     }
+
+    public <T> List<List<T>> getListPages(List<T> list, Integer pageSize) {
+
+        if (list == null || list.size() == 0)
+
+            return Collections.emptyList();
+
+        if (pageSize == null || pageSize <= 0 || pageSize > list.size())
+            pageSize = list.size();
+        int numPages = (int) Math.ceil((double) list.size() / (double) pageSize);
+
+        List<List<T>> pages = new ArrayList<>();
+
+        for (int pageNumber = 0; pageNumber < numPages; ) {
+            pages.add(list.stream()
+                    .skip(pageNumber++ * pageSize)
+                    .limit(pageSize)
+                    .toList());
+        }
+        return pages;
+    }
+
 
     public void buscarContato() {
         String contatoAPesquisar = EntradaDados.obterNomePesquisa();
